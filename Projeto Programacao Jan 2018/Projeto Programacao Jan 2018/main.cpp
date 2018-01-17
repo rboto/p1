@@ -6,6 +6,7 @@ using namespace std;
 
 //funções
 int listar() {
+	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Listar" << endl;
 	cout << "\n######################" << endl;
@@ -13,6 +14,7 @@ int listar() {
 };
 
 int inserir() {
+	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Inserir" << endl;
 	cout << "\n######################" << endl;
@@ -20,6 +22,7 @@ int inserir() {
 };
 
 int alterar() {
+	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Alterar" << endl;
 	cout << "\n######################" << endl;
@@ -27,6 +30,7 @@ int alterar() {
 };
 
 int consultar() {
+	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Cosultar" << endl;
 	cout << "\n######################" << endl;
@@ -34,6 +38,7 @@ int consultar() {
 };
 
 int eliminar() {
+	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Eliminar" << endl;
 	cout << "\n######################" << endl;
@@ -56,35 +61,36 @@ bool menu() {
 	cout << "\n\t5. Eliminar" << endl;
 
 	//apanhar a escolha
-	char escolhamenu;
+	int escolhamenu;
 	cin >> escolhamenu;
 
 	switch (escolhamenu)
 	{
 	case 1:
-		cout << "1. Listar";
+		listar();
 
 		break;
 	case 2:
-		cout << "2. Inserir";
+		inserir();
 
 		break;
 	case 3:
-		cout << "3. Alterar";
+		alterar();
 
 		break;
 	case 4:
-		cout << "4. Consultar";
+		consultar();
 
 		break;
 	case 5:
-		cout << "5. Eliminar";
+		eliminar();
 
 		break;
 	default:
-		cout << "Não escolheu uma opção válida. Tente novamente \n";
-		cin >> escolhamenu;
-		break;
+		system("cls");
+		cout << "\n\tNão escolheu uma opção válida. Tente novamente \n";
+		return false;
+	
 	}
 	return true;
 };
