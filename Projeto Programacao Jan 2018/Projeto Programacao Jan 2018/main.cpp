@@ -1,46 +1,85 @@
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
 using namespace std;
 
-// we return whether the menu was processed correctly
-bool processMenu() {
-	// show the user the menu
-	cout << "Main Menu" << endl;
-	cout << "Select your favorite food" << endl;
-	cout << "1. Cheese Burger" << endl;
-	cout << "2. Ramen" << endl;
-	cout << "3. Mashed Potatos" << endl;
+//funções
+int listar() {
+	return 0;
+};
 
-	// get the response
-	char choice;
-	cin >> choice;
+int inserir() {
+	return 0;
+};
 
-	// process the response
-	// do something for each valid option
-	if (choice == '1') {
-		cout << "Hold the pickle, hold the lettuce." << endl;
-		system("PAUSE");
-	}
-	else if (choice == '2') {
-		cout << "Yum, with extra naruto." << endl;
-	}
-	else if (choice == '3') {
-		cout << "Don't forget the gravy." << endl;
-	}
-	else {
-		// if we got this far, the response was not valid
-		return false;
+int alterar() {
+	return 0;
+};
+
+int consultar() {
+	return 0;
+};
+
+
+
+//menu
+bool menu() {
+
+	cout << "######################" << endl;
+	cout << "\nBem-vindo ao nosso projeto de programacao Janeiro 2018" << endl;
+	cout << "\n######################" << endl;
+	cout << "\nSeleccione a sua opção:" << endl;
+	cout << "\n\t1. Listar" << endl;
+	cout << "\n\t2. Inserir" << endl;
+	cout << "\n\t3. Alterar" << endl;
+	cout << "\n\t4. Consultar" << endl;
+	cout << "\n\t5. Eliminar" << endl;
+
+	//apanhar a escolha
+	char escolhamenu;
+	cin >> escolhamenu;
+
+	switch (escolhamenu)
+	{
+	case 1:
+		cout << "1. Listar";
+
+		break;
+	case 2:
+		cout << "2. Inserir";
+
+		break;
+	case 3:
+		cout << "3. Alterar";
+
+		break;
+	case 4:
+		cout << "4. Consultar";
+
+		break;
+	case 5:
+		cout << "5. Eliminar";
+
+		break;
+	default:
+		cout << "Não escolheu uma opção válida. Tente novamente \n";
+		cin >> escolhamenu;
+		break;
 	}
 	return true;
-}
+};
+
 
 int main() {
-	// we loop until the menu is processed
-	while (!processMenu()) {
-		// if we get here, the menu was not processed correctly
-		// so we bother them some more
-		cout << "Sorry, that is not a valid choice." << endl;
-		cout << "Please try again." << endl << endl << endl;
+	setlocale(LC_ALL, "Portuguese");
+
+	//loop para voltar sempre ao inicio	depois de escolher qualquer coisa
+	while (!menu()) {		
+		cout << "\nNão escolheu uma opção válida. Tente novamente" << endl;
+		system("PAUSE");
 	}
-	cout << endl << "Thank you for playing." << endl;
+	cout << endl << "##########  Salta fora ##########" << endl;
+	system("PAUSE");
 	return 0;
-}
+};
