@@ -6,20 +6,39 @@ using namespace std;
 
 //funções
 int listar() {
+	cout << "######################" << endl;
+	cout << "\n\t\tOpção Listar" << endl;
+	cout << "\n######################" << endl;
 	return 0;
 };
 
 int inserir() {
+	cout << "######################" << endl;
+	cout << "\n\t\tOpção Inserir" << endl;
+	cout << "\n######################" << endl;
 	return 0;
 };
 
 int alterar() {
+	cout << "######################" << endl;
+	cout << "\n\t\tOpção Alterar" << endl;
+	cout << "\n######################" << endl;
 	return 0;
 };
 
 int consultar() {
+	cout << "######################" << endl;
+	cout << "\n\t\tOpção Cosultar" << endl;
+	cout << "\n######################" << endl;
 	return 0;
 };
+
+int eliminar() {
+	cout << "######################" << endl;
+	cout << "\n\t\tOpção Eliminar" << endl;
+	cout << "\n######################" << endl;
+	return 0;
+}
 
 
 
