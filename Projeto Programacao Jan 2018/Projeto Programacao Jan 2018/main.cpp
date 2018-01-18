@@ -10,6 +10,9 @@ using namespace std;
 
 //a inventar cenas dos refs 073 e afins
 //declarações
+
+
+// TESTE DA CATIA
 struct livro
 {
 	long num;
