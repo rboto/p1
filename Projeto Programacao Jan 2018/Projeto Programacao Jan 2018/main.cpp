@@ -3,7 +3,8 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include <cstdlib>
+//#include <cstdlib>
+//#include <cstdio>
 //#include <WinBase.h>
 using namespace std;
 
@@ -74,19 +75,19 @@ int inserir() {
 			// ficheiro binário
 			// repetir até que se digite a tecla ESC
 
-			system("cls");
+			//system("cls");
 
 			printf("\n\nDigite o ISBN do livro: ");
 			fflush(stdin);
-			scanf("%ld", &liv.num);
+			cin >> liv.num;
 
 			printf("\n\nDigite o Titulo do livro: ");
 			fflush(stdin);
-			gets_s(liv.nome);
+			gets_s(liv.nome,30);
 
 			printf("\n\nDigite o Autor do livro: ");
 			fflush(stdin);
-			gets_s(liv.autor);
+			gets_s(liv.autor,30);
 
 			printf("\n\nDigite o valor do livro: ");
 			fflush(stdin);
