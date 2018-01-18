@@ -3,8 +3,8 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <locale.h>
-//#include <cstdlib>
-//#include <cstdio>
+#include <cstdlib>
+#include <cstdio>
 //#include <WinBase.h>
 using namespace std;
 
@@ -72,15 +72,15 @@ int inserir() {
 
 			printf("\n\nDigite o ISBN do livro: ");
 			fflush(stdin);
-			cin >> liv.num;
+			scanf("%ld", &liv.num);
 
 			printf("\n\nDigite o Titulo do livro: ");
 			fflush(stdin);
-			gets_s(liv.nome,30);
+			gets(liv.nome);
 
 			printf("\n\nDigite o Autor do livro: ");
 			fflush(stdin);
-			gets_s(liv.autor,30);
+			gets(liv.autor);
 
 			printf("\n\nDigite o valor do livro: ");
 			fflush(stdin);
