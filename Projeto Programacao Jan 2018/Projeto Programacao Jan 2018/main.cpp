@@ -60,14 +60,7 @@ int inserir() {
 
 		exit(0);
 	}
-
-	// se cheguei a esta parte do programa é que está tudo bem
-
-	/*cout << "\n\nClique em ESC para sair\n\n" << endl;
-	cout << "\t ou em outra tecla para novo registo\n\n" << endl;
-	cout.flush();*/
-
-	//fflush(stdin);
+		
 	if (_getch() != 27)
 		do
 		{
@@ -132,7 +125,7 @@ int alterar() {
 int consultar() {
 	system("cls");
 	cout << "######################" << endl;
-	cout << "\n\t\tOpção Cosultar" << endl;
+	cout << "\n\t\tOpção Consultar" << endl;
 	cout << "\n######################" << endl;
 
 	// abre agora o ficheiro para leitura
