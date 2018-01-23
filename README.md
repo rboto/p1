@@ -38,3 +38,43 @@ Considerações:
 2. Inserir
 Buscar o último ID
 perguntar o nome, autor, editora, Ano;
+cria o objeto (ou struct) livro(nome, autor, editora...)
+Atribui valor em prateleira (push//append)
+escreve objeto para ficheiro
+
+3.Alterar
+Pergunta qual objeto (ID)
+Abre ficheiro, lê objeto
+Pergunta qual o campo a alterar
+Pede para introduzir novo valor para esse campo
+Grava no ficheiro
+Pergunta se pretende alterar mais alguma coisa (repeat...) ou volta para menu anterior
+
+4.Consultar
+Pergunta al é a ID
+Devolve array (prateleira/corredor)
+
+5.Eliminar
+Pergunta qual é a ID
+Lista as propriedades do objeto
+Pergunta de confirmação se é aquele objeto para eliminar (S/N)
+Elimina objeto, e diz a prateleira de onde ele saiu.
+
+##########################################################################
+
+Funções necessárias:
+
+=Listar menu
+=Inserir Livro
+
+=Função abrir ficheiro
+=Função fechar ficheiro
+
+=Função criar um array de prateleiras (verificar se já existe um)
+=Função adicionar objeto a prateleira
+=Função ler prateleira
+
+=Função criar objeto
+=Função alterar objetos
+=Função apagar objetos
+=Função listar objetos
