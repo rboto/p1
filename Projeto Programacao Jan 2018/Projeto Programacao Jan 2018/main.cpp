@@ -29,8 +29,7 @@ char ch;
 
 int atrisbn() {
 
-	int isbn = 0;
-	system("cls");
+	int isbn = 0;	
 
 	fp = fopen("dados.dat", "r");
 	
@@ -41,7 +40,7 @@ int atrisbn() {
 
 	fclose(fp);
 
-	system("PAUSE");
+	//system("PAUSE");
 	return isbn + 1;
 };
 
@@ -117,8 +116,7 @@ int inserir() {
 			// nota - não estamos a validar a introdução. experimentem ver a opção consultar, visto
 			// se inserirem espaços/ENTER ele guarda isso tudo no ficheiro e a consulta/listagem fica "feia"
 
-			liv.num = atrisbn();
-			scanf("%ld", &liv.num);
+			liv.num = atrisbn();			
 			printf("\n\n\nISBN: %ld", liv.num);
 
 			// HELP - não consigo que a pergunta "titulo do livro" funcione no visual studio
