@@ -26,6 +26,26 @@ FILE *fp;
 char ch;
 
 //funções
+
+int atrisbn() {
+
+	int isbn = 0;
+	system("cls");
+
+	fp = fopen("dados.dat", "r");
+	
+	while (fread(&liv, sizeof(liv), 1, fp))
+	{
+		isbn++;
+	}
+
+	fclose(fp);
+
+	system("PAUSE");
+	return isbn + 1;
+};
+
+
 int listar() {
 	//estudar melhor os REF 74 & 72, pois esta função não está a funcionar bem
 	//exemplo: há neste momento dois registos - 123 e 1234 - se escrevermos 1 ele devolve o primeiro
@@ -67,10 +87,10 @@ int listar() {
 };
 
 int inserir() {
-	system("cls");	
-	/*cout << "######################" << endl;
+	system("cls");
+	cout << "######################" << endl;
 	cout << "\n\t\tOpção Inserir" << endl;
-	cout << "\n######################" << endl;	*/
+	cout << "\n######################" << endl;	
 	//o programa ao correr mostra as linhas acima e fica a espera de um ENTER
 	//como saltamos a frente e mostramos logo as perguntas?
 
@@ -96,23 +116,30 @@ int inserir() {
 		{			
 			// nota - não estamos a validar a introdução. experimentem ver a opção consultar, visto
 			// se inserirem espaços/ENTER ele guarda isso tudo no ficheiro e a consulta/listagem fica "feia"
-			printf("\n\nDigite o ISBN do livro: ");
-			fflush(stdin);
-			scanf("%ld", &liv.num);					
+
+			liv.num = atrisbn();
+			scanf("%ld", &liv.num);
+			printf("\n\n\nISBN: %ld", liv.num);
+
+			// HELP - não consigo que a pergunta "titulo do livro" funcione no visual studio
+			// :( Simplesmente salta para a pergunta seguinte
 			
 			printf("\n\nDigite o Titulo do livro:");
 			while (getchar() != '\n');
 			fgets(liv.nome, 30, stdin);
 			// fgets é o gets mas novo e atualizado
-			
+			//printf("\nNome: %s", liv.nome);
+
 			printf("\n\nDigite o Autor do livro: ");
 			fflush(stdin);
 			fgets(liv.autor, 30, stdin);
-			
+			//printf("\nAutor: %s", liv.autor);
+
 			printf("\n\nDigite o valor do livro: ");
 			fflush(stdin);
 			scanf("%f", &liv.valor);
-						
+			//printf("\nValor: %4.2f", liv.valor);
+			
 			fwrite(&liv, sizeof(liv), 1, fp);
 
 			// o ESC está a gerar loop no menu inicial é preciso perceber porquê
@@ -164,7 +191,7 @@ int consultar() {
 
 		printf("\nAutor: %s", liv.autor);
 
-		printf("\nValor: %4.2f", liv.valor);
+		printf("\nValor: %4.2f\n", liv.valor);
 	}
 
 
