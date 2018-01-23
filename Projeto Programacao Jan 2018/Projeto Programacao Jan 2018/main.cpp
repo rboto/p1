@@ -109,16 +109,16 @@ int inserir() {
 		cout.flush();		
 		ch = getchar();
 		exit(0);
-	}
+	};
 		
 	if (_getch() != 27)
 		do
 		{			
 			// nota - não estamos a validar a introdução. experimentem ver a opção consultar, visto
 			// se inserirem espaços/ENTER ele guarda isso tudo no ficheiro e a consulta/listagem fica "feia"
-
+			printf("\n\nO ISBN do livro: ");
 			liv.num = atrisbn();
-			scanf("%ld", &liv.num);
+			
 			printf("\n\n\nISBN: %ld", liv.num);
 
 			// HELP - não consigo que a pergunta "titulo do livro" funcione no visual studio
