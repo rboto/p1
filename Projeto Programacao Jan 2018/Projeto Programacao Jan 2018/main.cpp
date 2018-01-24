@@ -29,8 +29,7 @@ char ch;
 
 int atrisbn() {
 
-	int isbn = 0;
-	system("cls");
+	int isbn = 0;	
 
 	fp = fopen("dados.dat", "r");
 	
@@ -41,7 +40,7 @@ int atrisbn() {
 
 	fclose(fp);
 
-	system("PAUSE");
+	//system("PAUSE");
 	return isbn + 1;
 };
 
@@ -109,16 +108,15 @@ int inserir() {
 		cout.flush();		
 		ch = getchar();
 		exit(0);
-	};
+	}
 		
 	if (_getch() != 27)
 		do
 		{			
 			// nota - não estamos a validar a introdução. experimentem ver a opção consultar, visto
 			// se inserirem espaços/ENTER ele guarda isso tudo no ficheiro e a consulta/listagem fica "feia"
-			printf("\n\nO ISBN do livro: ");
-			liv.num = atrisbn();
-			
+
+			liv.num = atrisbn();			
 			printf("\n\n\nISBN: %ld", liv.num);
 
 			// HELP - não consigo que a pergunta "titulo do livro" funcione no visual studio
@@ -154,9 +152,6 @@ int inserir() {
 
 		fclose(fp);
 
-		
-
-
 
 	system("PAUSE");
 	return 0;
@@ -191,7 +186,7 @@ int consultar() {
 
 		printf("\nAutor: %s", liv.autor);
 
-		printf("\nValor: %4.2f\n", liv.valor);
+		printf("\nValor: %4.2f \n", liv.valor);
 	}
 
 
@@ -274,12 +269,6 @@ int main() {
 	}
 
 	
-
-
-
-
-
-
 
 	system("PAUSE");
 	return 0;
