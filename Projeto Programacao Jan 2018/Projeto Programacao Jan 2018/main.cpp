@@ -10,6 +10,7 @@
 #include <locale.h>
 #include <cstdlib>
 #include <cstdio>
+#include <string.h>
 //#include <WinBase.h>
 using namespace std;
 
@@ -45,41 +46,91 @@ long atrisbn(FILE **fp, struct livro liv) {
 };
 
 
-int listar(FILE **fp) {
+int procurar() {
 	//estudar melhor os REF 74 & 72, pois esta função não está a funcionar bem
 	//exemplo: há neste momento dois registos - 123 e 1234 - se escrevermos 1 ele devolve o primeiro
 	//se escrevermos 1234 ele só devolve o 123
 
-	long salto;
+	int salto, opc;
+	char encontralivro;
 	system("cls");
 	cout << "######################" << endl;
-	cout << "\n\t\tOpção Listar" << endl;
+	cout << "\n\t\tOpção Procurar" << endl;
 	cout << "\n######################" << endl;
+	cout << endl << endl;
+	cout << "1. Procurar por ISBN" << endl;
+	cout << "2.Procurar por nome" << endl;
+	cout << "Escolha a opção:" << endl;
+	
+	fp = fopen("dados.dat", "r");
+	rewind(fp);
 
-	// aceder e ler um registo especifico  
-	// fazer reset do ptr do fich para o inicio
-
-	*fp = fopen("dados.dat", "r");
-
-	printf("\n\n\nDigite o numero do registo que pretenda ler: ");
-
-	fflush(stdin);
-	scanf("%ld", &salto);
-
-	// posicionar-se
-
-	fseek(*fp, (long)(salto - 1) * sizeof(liv), SEEK_SET);
-
-	// ler o reg localizado 
-	fread(&liv, sizeof(liv), 1, *fp);
-
-	// mostrar o reg seleccionado
-	printf("\nISBN: %ld", liv.num);
-	printf("\nNome: %s", liv.nome);
-	printf("\nAutor: %s", liv.autor);
-	printf("\nValor: %4.2f\n\n\n", liv.valor);
-
-	fclose(*fp);
+	switch(getch()){
+		
+		case '1': 
+			system("cls");
+			printf("\n\n\nDigite o numero do registo que pretenda ler: ");
+			fflush(stdin);
+			scanf("%d", &salto);
+			while(fread(&liv, sizeof(liv), 1, fp)==1) {	
+				if(liv.num == salto){			
+					printf("\nISBN: %ld", liv.num);
+					printf("\nNome: %s", liv.nome);
+					printf("\nAutor: %s", liv.autor);
+					printf("\nValor: %4.2f\n\n\n", liv.valor);
+					encontralivro = 'OK'; //verificação se encontra						
+				}
+		
+			}
+			if(encontralivro != 'OK'){
+				printf("\nISBN não encontrado.");
+				printf("\nDeseja procurar novamente? (S/N)");
+				if(getch()=='s'){
+					return procurar();
+				} else {
+					return 0;
+					break;
+				}	
+			}
+		case '2':
+			
+			char nome_proc[20];
+			system("cls");
+			printf("\n\n\nDigite o nome do livro: ");
+			fflush(stdin);
+			scanf("%s",nome_proc);
+			
+			int salto = 0;
+			while(fread(&liv, sizeof(liv), 1, fp)==1) {
+				
+				if(strcmp(liv.nome,(nome_proc))==0){
+					printf("\nISBN: %ld", liv.num);
+					printf("\nNome: %s", liv.nome);
+					printf("\nAutor: %s", liv.autor);
+					printf("\nValor: %4.2f\n\n\n", liv.valor);
+					salto++;			
+				}
+				
+				if(salto==0){
+					printf("\nNome não encontrado.");
+					printf("\nDeseja procurar novamente? (S/N)");
+					if(getch()=='s'){
+						return procurar();
+					} else {
+						return 0;
+						break;
+					}	
+					
+				}
+		}
+		
+//		default:
+//			getch();
+//			procurar();		
+		
+	}
+	
+	fclose(fp);
 
 	system("PAUSE");
 	return 0;
@@ -99,7 +150,7 @@ int inserir(long total, FILE **fp) {
 	
 	//dormir aqui? Sleep(3000);
 	
-	if (fp == NULL)
+	if (*fp == NULL)
 	{
 		cout << "ERRO!\nO Ficheiro não foi aberto.\n" << endl;
 
@@ -254,7 +305,7 @@ int main() {
 					alterar();
 					break;
 				case 4:
-					listar(&fp);
+					procurar();
 					break;
 				case 5:
 					eliminar();
