@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa Ref_060_func_recursiva_1
+
+// Cálculo factorial de um numero
+
+
+/* 
+  Cálculo do Factorial de um número usando recursividade
+
+  O fatorial de um número n é o produto de todos os seus 
+  antecessores, incluindo si próprio e excluindo o zero. 
+
+  A representação é feita pelo númeor fatorial seguido do 
+  sinal de exclamação, n! 
+
+  Exemplo de número fatorial:
+
+  6! = 6 . 5 . 4 . 3 . 2 . 1 = 720
+
+
+  Importante: n >= 0, ou seja, não existe fatorial 
+  para números negativos.
+
+  O fatorial de 0 ( 0! ) é 1
+
+  O numero fatorial pode ser modificado para outras formas:
+
+  n! = n . (n-1) . (n-2) . (n-3)!
+
+  exemplo:
+
+  6! = 6 . (6-1) . (6-2) . (6-3)!
+
+  6! = 6 . 5 . 4 . 3!
+
+  6! = 120 . 3!
+
+  6! = 120 . 3 . (3-1) . (3-2)!
+
+  6! = 120 . 3 . 2 . 1!
+
+  6! = 120 . 6 = 720
+
+
+  Resumidamente, e usando o número 5 como exemplo, o fatorial de 5 
+  é igual a 
+
+  5 * 4 * 3 * 2 * 1 que é igual a 120.
+
+  Portanto,
+
+  5! = 5 * 4!
+
+  e assim sucessivamente:
+
+  fatorial de x = x * fatorial de ( x - 1 )
+
+
+  Na resolução deste cálculo, normalmente usa-se uma função 
+  recursiva.
+
+  Uma função recursiva é uma função que se chama a si própria,
+  resolvendo em cada invocação uma parte do cálculo, cujo valor
+  parcial assim obtido fica guardado temporariamente no Stack 
+  até que sejam obtidos todos os resultados parciais.
+
+  Neste caso, o resultado final é calculado.  
+
+  A função recursiva requer um mecanismo ou uma condição de 
+  paragem para que não caia num looping infinito.
+
+  O código abaixo é elucidativo:
+
+*/
+
+
+int f1(int k)
+{
+	if (k == 0)  // condição de paragem
+
+		return 1;
+	else
+		return k * f1(k-1);
+}
+
+int main()
+{
+	int n = 5;
+
+	printf("\n\nO factorial de %d = %d", n,  f1(n));
+
+
+	printf("\n\n");
+	system("pause");
+
+	return 0;
+}
+

@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+
+// Programa Ref_077_classe_basica
+
+/*
+   Uma classe é um programa referência que funciona como modelo 
+   ou template. 
+
+   Como programa referência torna-se apenas “acessível” através 
+   das suas instâncias, que são como cópias, réplicas concretas,
+   os chamados objectos.
+
+   Ou seja, as classes para poderem ser utilizadas devem ser 
+   instanciadas, processo que consiste na criação de objectos, 
+   os quais são réplicas acessíveis e utilizáveis da classe.
+
+   Na sua forma, Uma classe é um tipo definido pelo programador, 
+   semelhante a uma estrutura, mas com a capacidade de poder 
+   conter funções.
+
+   Os dados da classe são conhecidos por atributos, propriedades 
+   ou caracetrísticas.
+
+   As funções são conhecidas por métodos da classe. Elas vão agir 
+   sobre os dados da classe.	 
+
+   Vejamos um exemplo de uma classe básica:
+*/
+
+class CRect
+{
+public:
+	int largura, altura;
+};
+
+int main()
+{
+	CRect rect1;
+	CRect rect2;
+
+	rect1.largura = 30;
+	rect1.altura = 60;
+	rect2.largura = 40;
+	rect2.altura = 80;
+
+	cout << endl << "Perimetro do objecto Rect1 = "
+		 << (rect1.altura * 2) + (rect1.largura * 2)
+		 << " Pixeis" << endl << endl;
+
+	cout << endl << "Perimetro do objecto Rect2 = "
+		 << (rect2.altura * 2) + (rect2.largura * 2)
+		 << " Pixeis" << endl << endl;
+
+	cout << "Um objecto CRect ocupa " << sizeof(rect1)
+		 << " bytes";
+
+	cout << endl << endl;
+	fflush(stdin);
+	getchar();
+	return 0;
+}

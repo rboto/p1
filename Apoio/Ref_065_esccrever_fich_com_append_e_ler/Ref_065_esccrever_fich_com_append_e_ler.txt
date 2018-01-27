@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+// Programa Ref_065_escrever_fich_com_append_e_ler
+
+// Nesta versão o programa abre o ficheiro dados.txt para escrita,
+// mas com anexação (append) não perdendo assim o texto anterior
+// para além da profusão de comentários.
+
+
+// Correr este programa no Dev C++
+
+// Este programa pede para digitar caracteres e escreve-os, um a um,  
+// num ficheiro de texto.
+// A digitação dos carateres termina pressionando a tecla ENTER ('\n').
+
+// seguidamente, o programa lê-os a partir do mesmo ficheiro
+
+int main(int argc, char *argv[]) 
+{
+	setlocale(LC_ALL, "Portuguese");
+	
+	FILE *fp; // ptr para um ficheiro
+	
+	char ch; // var char para guardar cada carater lido
+
+// seguidamente abre-se o ficheiro de texto dados.txt para escrita
+// como é para excrita, se o fich não existir na pasta do projeto, 
+// então será criado automaticamente
+
+	fp = fopen("dados.txt", "a"); // abertura do ficheiro para escrita ("a") com anexação
+		
+	if (fp != NULL) // se conseguiu abrir o ficheiro, então fazer:
+	{
+		printf("\n\nDigite carateres para escrever no ficheiro aberto dados.txt\n\n");
+		
+// cada carater digitado, até se clicar na tecla ENTER, é carregado
+// na var ch e escrito no ficheiro dados.txt
+// o ficheiro é referenciado pelo seu ptr fp
+// o comando:
+// fputc(ch, fp)
+// significa:
+// file put carater guardado em ch no fich representado pelo ptr fp
+// ou seja:
+// pôr o carater guardado em ch no fich apontado pelo ptr fp
+
+		while( (ch = getchar()) != '\n' )
+		{
+			fputc(ch, fp);	
+		}	
+				printf("\n\nTexto escrito no fich dados.txt\n\n");
+	
+		fclose(fp);	// fechar o fich aberto para escrita
+	}
+	else
+	{
+		printf("\n\nTexto NAO foi escrito no file\n\n");
+	}
+
+	fp = fopen("dados.txt", "r"); // abir agora o fich para leitura
+
+
+	if (fp != NULL) // se abriu bem o fich para leitura, então:
+	{		
+		printf("\nEis o texto lido do ficheiro:\n\n");
+		
+// o seguinte ciclo lê, a partir do fich, um carater de cada vez, 
+// guardando-o na var ch e enviando-o para o ecrã
+// a leitura dos carateres termina logo que seja detetada a marca 
+// EOF que significa End Of File
+
+// o comando:
+
+// fgetc(fp)
+// significa:
+// file get carater a partir do fich apontado pelo ptr fp
+		
+		while ((ch=fgetc(fp)) != EOF)
+		{	
+        	putchar(ch); // mesmo que printf("%c", ch)
+    	}
+    	
+      fclose(fp);	// fecho do fich que foi aberto para leitura
+    }
+    else  
+		printf("\n\nTexto Nao foi lido\n\n");
+	
+	printf("\n\nFim\n\n");
+	system("PAUSE");
+	return 0;
+}

@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+// Programa Ref_066_ler_fich_linha_a_linha
+
+/* Este programa lê um ficheiro de texto, linha a linha, mostrando
+   o seu conteúdo no ecrã.
+
+   Para tal, aplica a primitiva fgets
+*/
+
+int main(int argc, char *argv[]) 
+{
+	setlocale(LC_ALL, "Portuguese");
+	FILE *fp1; // ponteiro para o fich de leitura
+   	
+	char str[80]; // para guardar uma string
+
+   /* abertura do ficheiro para leitura */
+   /* se a abertura não for bem sucedida então o ptr fp1 recebe NULL */
+   
+   	fp1 = fopen("noticia.txt" , "r");
+   	if(fp1 == NULL)
+    {
+      // no caso de erro de abertura enviar a mensagem para o
+      // sistema de mensagens de erros.
+      
+      perror("Erro na abertura do ficheiro de leitura");
+      return(-1);
+    }
+   	
+/*
+	A primitiva fgets significa file get string, ou seja, lê 
+	uma string do ficheiro referenciado através do ptr fp1, no 
+	máximo 80 carateres, carregando na string chamada aqui de 
+	str.
+	
+*/
+	// ler enquanto houverem linhas de texto
+    while( fgets (str, 80, fp1 ) != NULL )  
+    {
+      /* envia para o ecrã a string lida a partir do ficheiro*/
+      	
+     printf("\n%s", str);
+      
+    }
+    fclose(fp1); // fechar o ficheiro
+
+	printf("\n\n");
+	system("PAUSE");
+		
+	return 0;
+}

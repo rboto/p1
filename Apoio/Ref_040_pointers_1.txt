@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+/*  Programa Ref_040_pointers_1
+
+	Apontadores
+
+	Um pointer é uma var que guarda o endereço de 
+	outra var, permitindo assim o acesso a esta de 
+	uma forma indirecta.
+
+	Declaração de um pointer:
+
+	tipo_de_dados_da_var_que_aponta_para  *nome_ponteiro;
+
+	Exemplo:
+
+	float *p1;
+
+	No exemplo acima, significa que p1 é um ponteiro que aponta para
+	uma var do tipo float. Ou seja, p1 guarda o endereço de uma var 
+	do tipo float e pode assim acedê-la indirectamente.
+
+	Particularidades dos ponteiros:
+
+	&	antes de uma var (préfixo) refere-se ao próprio endereço 
+		dessa var.
+	*	antes de ponteiro, mas fora da sua declaração, refere-se a
+		um acesso indirecto (o ponteiro acede ao conteúdo da var que 
+		está a apontar para).
+
+	Exemplo:
+
+	int x;		---- declara x como var do tipo int
+	x = 10;		---- atribuição do valor 10 à var x
+
+	int *P;		---- p é um ptr que aponta para uma var int
+
+	p = &x;     ---- p guarda o endereço de x (p aponta para x)
+
+	printf("\n %d", *p); ---- mostra no ecrã o valor de x (10)
+*/
+
+int main()
+{
+	setlocale(LC_ALL, "Portuguese");
+
+	int a; // declara var a
+
+	int *p;// declara um ptr para inteiros
+
+	p = &a;	// p guarda endereço da var a
+
+	printf("\n\nDigite um valor inteiro: ");
+	fflush(stdin);
+	scanf("%d", &a);
+
+	printf("\n\nValor da var a directamente: %d", a);
+		
+	printf("\n\nValor da var a indirectamente: %d", *p);
+	
+	*p = 20; // altera indirectamente valor de a
+
+	printf("\n\nNovo valor da var a apos ser alterado indirectamente: %d", *p);
+
+	// ver os endereços
+
+	printf("\n\nEndereco da var a: %ld", (unsigned long) &a);
+	printf("\n\nConteudo de p = endereco da var a: %ld", (unsigned long) p);
+	printf("\n\nEndereco do pointer p: %ld", (unsigned long) &p);
+
+	printf("\n\n");
+	system("pause");
+
+	return 0;
+}

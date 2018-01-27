@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa C: Ref_019_chars_e_strings_2
+
+// Revendo os chars e as strings
+
+// Uma string é um conjunto de carateres terminados
+// pelo carater especial '\0'
+// 
+// O carater especial '\0' é inserido automaticamente
+//
+// '\0' determina assim o fim da string (terminus)
+
+int main()
+{
+	char msg[30];
+
+	int i; // indice e contador
+	int k; // contador
+
+// ler e mostrar uma string através do gets e printf
+
+	printf("\n\nDigite um texto curto:\n\n ");
+	fflush(stdin);
+	gets(msg);
+	printf("\n\nEis a string digitada:\n\n %s", msg);
+
+// ler uma string através da função gets e mostrá-la
+// no ecrã carater a carater, desde o início até ao 
+// seu terminus (vamos assim simular o printf)
+
+	printf("\n\nDigite um texto curto:\n\n ");
+	fflush(stdin);
+	gets(msg);
+	printf("\n\nEis a string digitada:\n\n %s", msg);
+	
+	printf("\n\nEis novamente a string acedida carater a carater:\n\n");
+	i = 0;
+	while(msg[i] != '\0')
+	{
+		printf("\n%c", msg[i]);
+		i++;
+	}
+
+// Contar a quantidade de carateres 'a' (a string anterior)
+
+	k = 0; // contador de carateres 'a'
+	i = 0; // indice geral
+	while(msg[i]) // enquanto houverem carateres
+	{	
+		if (msg[i] == 'a')
+			k++; // não requer {} por que trata-se apenas de um cmd associado ao if
+		i++;
+	}
+	printf("\n\nA frase contem %d carateres a", k);
+
+// Vamos agora substituir cada espaço por um #, afetando
+// assim o conteudo da memória
+
+	i = 0; // indice geral
+	while(msg[i]) // enquanto houverem carateres
+	{	
+		if (msg[i] == ' ')
+
+			msg[i] = '#'; 
+
+		i++;
+	}
+	printf("\n\nEis a string alterada:\n\n %s", msg);
+
+// vamos mostrar uma nova string invertida
+// primeiramente contar o numero de carateres e posicionar
+// o índice geral no fim da str
+
+	printf("\n\nDigite uma nova string para ser invertida:\n\n ");
+	fflush(stdin);
+	gets(msg);
+
+	i = 0; // indice geral
+	while(msg[i]) // enquanto houverem carateres, avançar
+		i++;
+
+// estamos no fim da string
+	while ( i >= 0)
+	{
+		printf("\n%c", msg[i]);
+		
+		i--;	
+	}
+
+	printf("\n\nEis a string alterada:\n\n %s", msg);
+
+	printf("\n\n\nDigite um caracter para continuar\n\n");
+	fflush(stdin);
+	getchar();
+
+	return 0;
+
+} // fecha o main

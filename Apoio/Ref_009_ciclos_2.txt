@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa C: Ref_009_ciclos_2
+
+// Introdução prática aos ciclos
+
+// O objetivo deste programa é simplesmente conhecer 
+// a utilidade dos ciclos.
+
+// Brevemente os ciclos serão analisados em mais detalhe
+
+// Este Programa calcula a média de 5 temperaturas 
+// digitadas
+
+/*
+	Dado que se trata de um programa que vai ler e manipular 
+
+	n valores, precisamos de um processo repetitivo.
+
+	Precisamos também de:
+
+	1. Declarar as variáveis
+
+		Uma variável tipo float para ler a temperatura - temp
+
+		Uma var tipo float para acumular o valor de cada temperatura - soma
+
+		Uma var tipo float para guardar a media - media
+
+		uma var tipo int para o contador do ciclo - k
+
+	2. Inicializar a zero o contador e o acumulador
+
+	3. Dentro de cada ciclo, precisamos de:
+
+		Ler a temperatura seguinte
+
+		Acumulá-la com a temp anterior
+
+		Atualizar o contador
+
+	4. Após a conclusão dos ciclos:
+
+		calcular e mostar o valor da media
+*/
+
+
+int main()
+{
+	short k;
+	float temp, soma, media;
+
+	printf("\n\nCalculo da Media de 5 temperaturas digitadas usando ciclos:\n\n");
+	
+	soma = 0;
+	k = 0;
+	while (k < 5)
+	{
+		printf("\n\nDigite o Valor seguinte: ");
+		fflush(stdin);
+		scanf("%f", &temp);
+		
+		soma = soma + temp;
+		
+	    	printf("Ciclo = %hd soma = %4.2f", k, soma);
+
+		k = k + 1;
+        
+	} // fecha while
+	
+	media = soma / 5;
+
+	printf("\n\nA Media das temperaturas = %4.2f", media);
+	
+	printf("\n\n");
+	system("PAUSE");
+	
+	return 0;
+
+} // fecha main
+

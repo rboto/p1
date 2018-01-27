@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa C: Ref_oo3_soma_de_dois_floats
+
+// Calcula a soma de dois floats digitados
+
+/*
+	Dado que se trata de um programa que vai manipular dados, precisamos de:
+
+	1. Declarar as variáveis - do tipo float
+
+	2. Ler os dados digitados
+
+	3. Calcular a soma dos dados digitados
+
+	4. Mostrar no ecrã o resultado
+*/
+
+int main()
+{
+	float n1, n2, soma;
+
+	printf("\n Digite o Valor 1: ");
+	fflush(stdin);
+	scanf("%f", &n1);
+
+	printf("\n Digite o Valor 2: ");
+	fflush(stdin);
+	scanf("%f", &n2);
+
+	soma = n1 + n2;
+
+	printf("\n\nA Soma de %4.2f com %4.2f = %4.2f", n1, n2, soma);
+	
+	printf("\n\n");
+    system("PAUSE");
+	
+	return 0;
+}
+

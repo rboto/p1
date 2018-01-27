@@ -1,0 +1,72 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+// Programa Ref_068_fichs
+
+/*
+	Este programa usa os comandos fprintf e fcanf
+	
+	O comando fcanf permite a escrita num ficheiro 
+	de texto formatado.
+	
+	O comando fscanf é o oposto do fprintf já que permite a leitura
+	de texto formatado a partir de um ficheiro de texto.
+
+*/
+int main(int argc, char *argv[]) 
+{	
+	setlocale(LC_ALL, "Portuguese");
+
+	FILE *fp1; 
+	FILE *fp2;
+ 
+ // declaração de alguns dados de diferentes tipos
+    int x=10;
+    char str[30]="Rua do Lumiar";
+    float y=3.5;
+ 
+    fp1 = fopen("dados1.txt", "w");
+    if (fp1 != NULL) 
+    {
+    
+    // vamos escrever no fich um inteiro, uma string e um float
+        fprintf(fp1, "%d %s %.1f", x, str, y);
+        
+        fclose(fp1);
+    }
+    else
+        printf("Erro na abertura ou criação do fich de escrita.\n");
+	
+	
+	// vamos agora ler a partir do ficheiro o texto formatado e 
+	// enviá-lo para o ecrã
+	
+	// abertura do fich para leitura
+	if((fp2 = fopen("dados1.txt", "r")) != NULL) 
+	{
+        
+		// como se pode constatar o comando fcanf é semelhante
+		// ao comando scanf só que a leitura dos dados é a 
+		// partir de um fich em vez de ser de um teclado
+		
+		fscanf(fp2, "%d %s %f", &x, str, &y);
+        
+        printf("\n\nEis os dados lidos a partir do ficheiro:\n\n");
+        
+        printf("x = %d\n", x);
+        printf("str = %s\n", str);
+        printf("y = %4.2f\n", y);
+        
+        fclose(fp2);
+    }
+    else
+        printf("O ficheiro especificado não existe!\n");
+        
+	
+	printf("\n\nConcluido!\n\n");
+	system("PAUSE");
+	
+	return 0;
+}

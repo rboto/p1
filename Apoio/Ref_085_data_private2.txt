@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+ 
+// Programa Ref_085_data_private2
+
+// Data member private
+// Mesmo que o programa anterior, mas com um dado 
+// private do tipo char.
+
+class pessoa
+{
+	// private data member por defeito
+	// não requer assim especificação de acesso
+	
+	char *nome; 
+
+public:
+
+	// serve para atribuir (Set) valor ao data member nome
+	void setNome(char *p)
+	{
+		nome = p;
+	}
+
+	// serve para ler (Get) o valor do data member nome
+	char * getNome()
+	{
+		return nome;
+	}
+};
+
+int main()
+{
+	pessoa pess; // objeto pess
+
+	// atribui e mostra o nome
+	pess.setNome("Ana Lia");
+	cout << endl << endl << "Nome = " 
+				 << pess.getNome() << endl << endl;
+
+	cout << "Digite uma tecla para sair" 
+						<< endl << endl << endl;
+	fflush(stdin);
+	getchar();
+
+	return 0;
+}
+

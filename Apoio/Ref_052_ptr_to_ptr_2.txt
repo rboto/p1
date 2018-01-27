@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa Ref_052_ptr_to_ptr_2
+
+// Mesmo que o programa pointer to pointer 1, mas com maior clareza na impressão
+// de resultados
+
+// Pointers to Pointers
+//
+// Ponteiros que apontam para ponteiros
+//
+// São vars-ponteiros que guardam endereços de outras vars-ponteiros
+// que, por sua vez, guardam endereços de vars finais, permitindo assim 
+// a estas um acesso de dupla indirecção. 
+// 
+// Particularidades:
+//
+// ** significa dupla indirecção/ponteiro para ponteiro
+//
+
+// Exemplo
+
+int main()
+{
+	int val;
+	int *p1;  // ponteiro indirecção simples(single ptr)
+	int **p2; // ponteiro indirecção dupla (double ptr)
+	
+	val = 5;
+
+	p1 = &val;
+	p2 = &p1;
+
+
+	printf("\n End da var val = %ld", (unsigned long) &val);
+	printf("\n End do ptr p1 = %ld", (unsigned long) &p1);
+	printf("\n End do ptr p2 = %ld", (unsigned long) &p2);
+	printf("\n Valor do ptr p1 = %ld", (unsigned long) p1);
+	printf("\n Valor do ptr p2 = %ld", (unsigned long) p2);
+
+
+	printf("\n Acesso directo a var val: %d", val);
+	printf("\n Acesso indirecto simples a var val: %d", *p1);
+	printf("\n Acesso indirecto duplo a var val: %d", **p2);
+
+	printf("\n\n\nResumindo a primeira parte: \n\n");
+	printf("&val       &p1        &p2         p1         p2      val   *p1  **p2\n\n");
+
+	printf("%ld", (unsigned long) &val);
+	printf("    %ld", (unsigned long) &p1);
+	printf("    %ld", (unsigned long) &p2);
+	printf("    %ld", (unsigned long) p1);
+	printf("    %ld", (unsigned long) p2);
+	printf("    %d", val);
+	printf("    %d", *p1);
+	printf("    %d", **p2);
+	
+// alterando val após double indirection
+	**p2 = 30;
+
+	printf("\n\n\n\n Apos alteracao da var val atraves de indirecao dupla: ");
+	printf("\n\n Acesso directo a var val: %d" , val);
+	printf("\n Acesso indirecto simples a var val: %d", *p1);
+	printf("\n Acesso indirecto duplo a var val: %d", **p2);
+
+	printf("\n\n\n");
+	system("pause");
+
+	return 0;
+}

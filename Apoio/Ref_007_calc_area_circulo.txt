@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa C: Ref_007_calc_area_circulo
+
+#define PI 3.14 // define uma constante
+
+// Exemplo como criar um programa simples
+
+/*
+  Este programa calcula a área de um círculo
+
+  fórmula:
+
+  area = PI * (raio * raio);
+
+*/
+
+int main()
+{
+	float area, raio;
+
+	printf("\nDigie o valor do raio: ");
+
+	fflush(stdin);
+	scanf("%f",  &raio);
+
+	area = PI * (raio * raio);
+	
+	printf("\nA area do circulo = %4.2f", area);
+
+	printf("\n\n\n\n");
+	system("PAUSE"); 
+	return 0;
+}

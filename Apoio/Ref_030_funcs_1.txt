@@ -1,0 +1,276 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa Ref_030_funcs_1
+
+/*
+Funções
+
+Uma função é um subprograma, devidamente nomeado, que 
+permite executar um conjunto de instruções, agrupado 
+em um bloco, delineado por {}, após uma chamada ou 
+invocação, através do seu nome, a partir de uma outra 
+parte do programa (programa principal, programa chamente 
+ou função chamante).
+
+As funções permitem assim executar, em várias partes
+do programa, uma série de instruções, resultando num 
+programa de tamanho mais reduzido simples, organizado, 
+otimizado e eficiente. 
+  
+Por outro lado, uma função pode invocar-se a si mesma, 
+sendo então conhecida por função recursiva.
+ 
+
+Porque usar funções ?
+
+Para permitir o reaproveitamento de código já construído.
+
+Para evitar que um parte de código que seja repetida 
+várias vezes dentro de um mesmo programa.
+
+Para permitir a alteração de uma parte de código de uma 
+forma mais rápida. Com o uso de uma função é preciso 
+alterar apenas dentro da função que se deseja.
+
+Para que os blocos do programa não fiquem grandes demais e, 
+por conseqüência, mais difíceis de entender.
+
+Para facilitar a leitura do programa-fonte de uma forma 
+mais fácil.
+
+Para separar o programa em partes(blocos) que possam ser 
+logicamente compreendidos de forma isolada.
+
+
+
+A declaração de uma função
+
+Antes de ser utilizada, uma função deve ser definida pois, 
+para chamá-la no corpo do programa, é preciso que o 
+compilador a conheça, ou seja, que ele conheça o seu nome, 
+seus argumentos e as instruções que ela contém. 
+
+A definição de uma função é chamada de "declaração". 
+
+A declaração de uma função é feita usando a seguinte sintaxe: 
+
+tipo_de_dado Nome_Da_função(tipo1 argumento1, tipo2 argumento2, ...)
+{ 
+	lista de instruções
+}
+
+Observações:
+
+Tipo_de_dado representa o tipo de valor que a função deve 
+retornar (char, float, int ...)
+
+Se a função não retorna nenhum valor, então coloca-se a 
+palavra-chave void antes dela.
+
+O nome da função segue as mesmas regras que os nomes dos 
+identificadores (variáveis, constantes, etc.).
+
+Os argumentos são facultativos, mas se não houver argumentos, 
+os parênteses devem continuar presentes.
+
+
+Chamada da função
+
+Para executar uma função, basta chamá-la escrendo o seu nome 
+(sempre respeitando o case sensitive), seguido de um parêntese 
+aberto (eventualmente argumentos) e, em seguida, um parêntese 
+fechado: 
+
+Nome_Da_Função();
+
+Observações:
+
+Se foram definidos argumentos na declaração da função, então 
+deverão ser separados por vírgulas!).
+
+Nome_Da_função (argumento1, argumento2);
+ 
+
+
+Protótipo de uma função
+
+O protótipo de uma função é a descrição de uma função que é 
+implementada em outra parte do programa.
+
+Assim, o protótipo é colocado no início do programa (antes 
+da função principal main()). 
+
+Esta descrição permite que o compilador "verifique" a 
+validade da função cada vez que ele a encontra no programa, 
+indicando-lhe:
+
+O tipo de valor retornado pela função
+O nome da função
+Os tipos de argumentos
+
+
+Ao contrário da definição da função, o protótipo não é seguido 
+pelo corpo da função (com instruções a serem executadas), e não
+inclui o nome dos parâmetros (apenas seu tipo). 
+
+Um protótipo da função tem esta aparência: 
+
+Tipo_de_dado_retornado Nome_Da_Função(tipo_argumento1, tipo_argumento2, ...);
+
+O protótipo é uma instrução, então, ele é acompanhado de um ponto e virgula!
+
+
+Vejamos alguns exemplos de protótipos: 
+
+void Exibir_car(char, int);
+
+int Somme(int, int);
+
+Os argumentos de uma função
+
+É possível passar argumentos para uma função, isto é, dar 
+um valor ou um nome a uma variável para que a função possa 
+executar operações sobre esses argumentos, ou graças a eles. 
+
+Passar argumentos para uma função faz-se através de uma lista 
+de argumentos (separados por vírgulas) entre parênteses, 
+imediatamente após o nome da função. 
+
+O número e tipo dos argumentos na declaração, o protótipo e 
+a chamada devem corresponder, se não, pode ocorrer um erro 
+durante a compilação... 
+
+
+Um argumento pode ser:
+
+uma constante
+uma variável
+uma expressão
+uma outra função
+
+Retorno de um valor por uma função
+
+A função pode retornar um valor (e, então, terminar) graças 
+à palavra-chave return.
+Quando a instrução return é encontrada, a função avalia o 
+valor que a segue e, em seguida, o retorna para o programa 
+de chamada (um programa a partir do qual a função foi chamada). 
+
+Uma função pode conter múltiplas instruções return, no entanto, 
+será a primeira instrução return encontrada que provocará o fim 
+da função e o retorno do valor que a segue. 
+
+A sintaxe da instrução "return" é simples: 
+
+return (valor_ou_variável);
+
+
+O tipo de valor retornado deve corresponder ao que foi 
+especificado na definição (e o protótipo).
+
+*/
+
+
+// Função para nos desejar as Boas vindas.
+void boas_vindas()
+{
+	printf("\n\nViva a todos\n\n");
+
+} // fecha boas_vindas
+
+// Função para somar e devolver a soma de dois inteiros
+int calc1(int num1, int num2)
+{
+	int soma;
+
+	soma = num1 + num2;
+
+	return  soma;
+
+} // fecha calc1
+
+// Função para calcular e devolver a média 
+// de dois inteiros (atenção média é float)
+float calc2(int a, int b)
+{
+	float m;
+
+	m = ((float)a + (float)b) / 2;
+
+	return m;
+
+} // fecha calc2
+
+// Função para imprimir um carater n vezes 
+void escreve(int n, char ch)
+{
+	int i;
+
+	i = 0;
+	while (i < n)
+	{
+	  printf ("%c", ch);
+
+	  i++;
+	}
+} // fecha escreve
+
+
+// Experimentos com funções
+// 1 - Cria uma func para nos desejar as Boas vindas.
+// 2 - Cria uma func para somar dois inteiros e devolver 
+//	   o resultado ao programa chamante.
+// 3 - Cria uma func para calcular e devolver a média de 
+//     dois inteiros    
+// 4 - Cria uma func para imprimir um carater n vezes 
+//     para delinear resultados no ecrã.
+
+int main()
+{
+// Declaração das vars
+	int x, y, resultado;
+	float media;
+
+// chama uma func de Boas Vindas
+	escreve(40, '-'); // imprime carater '-' 40 vezes
+	boas_vindas();
+	escreve(40, '-');
+
+
+// chama uma func para somar dois inteiros e 
+// devolver o resultado ao programa chamante.
+
+// ler os valores digitados
+	printf("\n\n\nDigite um inteiro: ");
+	fflush(stdin);
+	scanf("%d", &x);
+
+	printf("\n\nDigite o outro inteiro: ");
+	fflush(stdin);
+	scanf("%d", &y);
+
+	printf("\n\n\n");
+	escreve(40, '*');
+	resultado = calc1(x, y); // args actuais
+	printf("\n\nA soma de %d com %d = %d", x, y, resultado);
+	// printf("\n\nA soma de %d com %d = %d", x, y, calc1(x, y) );
+	printf("\n\n");
+	escreve(40, '*');
+	
+// chama um função para calcular e devolver a 
+// média de dois inteiros (atenção média é float)
+	
+	printf("\n\n\n\n");
+	escreve(40, '#');
+	media = calc2(x, y);
+	printf("\n\nA media de %d com %d = %4.2f", x, y, media);
+	printf("\n\n");
+	escreve(40, '#');
+
+	printf("\n\n");
+	system("pause");
+
+	return 0;	
+}
+

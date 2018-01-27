@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa Ref_034_scope1_vars
+
+/* 
+	Vars Locais scope 1 vars
+
+	São as vars declaradas dentro das funções.
+	
+    	As vars declaradas dentro de uma função são locais, 
+	ou seja, o seu âmbito (scope) limita-se à func onde 
+	foram declaradas.
+
+	Portanto, o valor de uma var numa função é somente 
+	do conhecimento da função a que pertence.
+
+	Vejamos os exemplos constantes neste programa.
+*/
+
+void mostra_vars()
+{
+
+// Atenção que estas duas vars (x, y) abaixo declaradas não 
+// são as mesmas vars x, y que foram declaradas na func main
+
+	int x, y; // vars locais a esta func (mostra_vars)
+
+	x = 333;
+	y = 555;
+
+	printf("\n\n O valor de x na func mostra_vars = %d", x );
+	printf("\n\n O valor de y na func mostra_vars = %d", y );
+}
+
+int main()
+{
+	int x, y; // vars locais a esta func (main)
+
+	x = 10;
+	y = 20;
+
+	printf("\n\n O valor de x no main = %d", x );
+	printf("\n\n O valor de y no main = %d", y );
+
+// chama func mostra_vars
+
+	mostra_vars();
+
+// regressa aqui depois de executar a func mostra_vars
+
+	printf("\n\n O valor de x no main continua como inicial = %d", x 
+
+);
+	printf("\n\n O valor de y no main continua como inicial = %d", y 
+
+);
+
+	printf("\n\n");
+	system("pause");
+
+	return 0;
+}

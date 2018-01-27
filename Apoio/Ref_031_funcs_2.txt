@@ -1,0 +1,165 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa Ref_031_funcs_2
+
+/*
+
+Este programa é o mesmo que o programa funcs1 com 
+a diferença de declarar os protótipos das funcs
+
+Revendo o conceito do Protótipo:
+Protótipo de uma função
+
+O protótipo de uma função é a descrição de uma função que é 
+implementada em outra parte do programa.
+
+Assim, o protótipo é colocado no início do programa (antes 
+da função principal main()). 
+
+Esta descrição permite que o compilador "verifique" a 
+validade da função cada vez que ele a encontra no programa, 
+indicando-lhe:
+
+O tipo de valor retornado pela função
+O nome da função
+Os tipos de argumentos
+
+
+Ao contrário da definição da função, o protótipo não é seguido 
+pelo corpo da função (com instruções a serem executadas), e não
+inclui o nome dos parâmetros (apenas seu tipo). 
+
+Um protótipo da função tem esta aparência: 
+
+Tipo_de_dado_retornado Nome_Da_Função(tipo_argumento1, tipo_argumento2, 
+
+...);
+
+O protótipo é uma instrução, então, ele é acompanhado de um ponto e 
+
+virgula!
+
+
+Vejamos alguns exemplos de protótipos: 
+
+void Exibir_car(char, int);
+
+int Soma(int, int);
+*/
+
+
+// Protótipos
+void boas_vindas();
+int calc1(int num1, int num2);
+float calc2(int a, int b);
+void escreve(int n, char ch);
+
+// Experimentos com funções
+// 1 - Cria uma func para nos desejar as Boas vindas.
+// 2 - Cria uma func para somar dois inteiros e devolver 
+//	   o resultado ao programa chamante.
+// 3 - Cria uma func para calcular e devolver a média de 
+//     dois inteiros    
+// 4 - Cria uma func para imprimir um carater n vezes 
+//     para delinear resultados no ecrã.
+
+int main()
+{
+// Declaração das vars
+	int x, y, resultado;
+	float media;
+
+// chama uma func de Boas Vindas
+	escreve(40, '-'); // imprime carater '-' 40 vezes
+	boas_vindas();
+	escreve(40, '-');
+
+
+// chama uma func para somar dois inteiros e 
+// devolver o resultado ao programa chamante.
+
+// ler os valores digitados
+	printf("\n\n\nDigite um inteiro: ");
+	fflush(stdin);
+	scanf("%d", &x);
+
+	printf("\n\nDigite o outro inteiro: ");
+	fflush(stdin);
+	scanf("%d", &y);
+
+	printf("\n\n\n");
+	escreve(40, '*');
+	resultado = calc1(x, y); // args actuais
+	printf("\n\nA soma de %d com %d = %d", x, y, resultado);
+	// printf("\n\nA soma de %d com %d = %d", x, y, calc1(x, y) );
+	printf("\n\n");
+	escreve(40, '*');
+	
+// chama um função para calcular e devolver a 
+// média de dois inteiros (atenção média é float)
+	
+	printf("\n\n\n\n");
+	escreve(40, '#');
+	media = calc2(x, y);
+	printf("\n\nA media de %d com %d = %4.2f", x, y, media);
+	printf("\n\n");
+	escreve(40, '#');
+
+	printf("\n\n");
+	system("pause");
+
+	return 0;
+	
+} // fecha main
+
+
+// Função para nos desejar as Boas vindas.
+void boas_vindas()
+{
+	printf("\n\nViva a todos\n\n");
+
+} // fecha boas_vindas
+
+
+// Função para somar e devolver a soma de dois inteiros
+int calc1(int num1, int num2)
+{
+	int soma;
+
+	soma = num1 + num2;
+
+	return  soma;
+
+} // fecha calc1
+
+
+
+// Função para calcular e devolver a média 
+// de dois inteiros (atenção média é float)
+float calc2(int a, int b)
+{
+	float m;
+
+	m = ((float)a + (float)b) / 2;
+
+	return m;
+
+} // fecha calc2
+
+
+
+// Função para imprimir um carater n vezes 
+void escreve(int n, char ch)
+{
+	int i;
+
+	i = 0;
+	while (i < n)
+	{
+	  printf ("%c", ch);
+
+	  i++;
+	}
+} // fecha escreve
+

@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa C: Ref_020_scanf_valor_retorno_1
+
+// Análise do valor de retorno da função scanf
+
+// Este programa explica como pode ser lido o valor 
+// de retorno da função scanf para posteriormente ser 
+// usado na validação de dados de entrada.
+
+int main()
+{
+	int n1, n2, resultado_scanf;
+		
+	printf("\n\nDigite dois inteiros: ");
+
+	resultado_scanf = scanf("%d%d", &n1, &n2);
+	
+	printf("\n\n O resultado da func scanf = %d", resultado_scanf);
+
+	printf("\n\n");
+	system("PAUSE");
+    		
+	return 0;
+}

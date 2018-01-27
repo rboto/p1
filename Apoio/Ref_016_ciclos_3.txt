@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define NUM_TEMPS 10 // constante
+
+// Programa C: Ref_016_ciclos_3
+
+// Calcular a média somente das temperaturas que estejam no 
+// intervalo entre 20 a 30 graus, pertencentes a dez
+// temperaturas digitadas.
+//
+// Portanto, das dez temperaturas, as que estejam fora deste
+// intervalo são assim ignoradas para o cálculo da média 
+// pretendida.
+//
+// Vamos precisar de dois contadores: um geral para controlar
+// a contagem dos dez ciclos e outro para controlar a contagem
+// específica das temperatura (de entre as dez) que estejam
+// eventualmente entre 20 e 30.
+//
+// Se não houverem temperaturas entre 20 e 30, então o programa
+// tem de tratar esta situação já que não podemos divir um 
+// valor por zero.
+
+int main()
+{
+	short ctdr_geral, ctdr_20_30;
+
+	float temp, soma_20_30, media_20_30;
+
+	soma_20_30 = 0;
+	ctdr_geral = 0;
+	ctdr_20_30 = 0;
+	while (ctdr_geral < NUM_TEMPS)
+	{
+		printf("\n Digite o temperatura seguinte: ");
+		fflush(stdin);
+		scanf("%f", &temp);
+
+		if((temp >= 20) && (temp <= 30))
+		{
+			soma_20_30 = soma_20_30 + temp;
+
+			ctdr_20_30 = ctdr_20_30 + 1;
+		}
+				
+		ctdr_geral = ctdr_geral + 1;
+
+	} // fecha while
+
+
+
+// Calcular a média das temps entre 20 e 30 se o seu contador for > 0
+
+	if (ctdr_20_30 > 0)
+	{
+		media_20_30 = soma_20_30 / ctdr_20_30;
+		printf("\n\nA Media das temperaturas entre 20 e 30 graus = %4.2f", media_20_30);
+	}
+	else
+	{
+		printf("\n\nNao ha temperaturas entre 20 e 30 graus");
+	}
+
+	printf("\n\n");
+    	system("PAUSE");
+
+	return 0;
+
+} // fecha main

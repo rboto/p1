@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define NUM_ELS 5
+
+// Programa Ref_033_funcs_4
+
+// Arrays Unidimensionais e funções
+
+/*
+  Este programa cria funções para calcular a média,
+  o máximo e o mínimo do array.
+
+  Como sabemos, as funcs são específicas no sentido
+  que somente podem devolver ao programa chamante
+  um valor.
+  
+  Desta forma, vamos precisar de três funções (uma
+  para calcular a média, outra para o máximo e
+  outra para o mínimo).
+*/
+
+// Resumindo, o programa calcula e retorna:
+
+// a média do array (passado como argumento)
+// O valor máximo
+// O valor mínimo
+
+
+// Func para calcular e devolver a média do array
+float calc_media(float nums[])
+{
+	int i;
+	float soma;
+
+// somar os valores para calcular a média
+	for (i = 0, soma = 0; i < NUM_ELS; i++)
+	{
+		soma = soma + nums[i];
+	}
+
+// calcular a média
+	return (soma / NUM_ELS);
+
+} // fecha calc_media
+
+
+float calc_maximo(float vals[])
+{
+	float max;
+	int i;
+
+// vamos dizer que o valor maximo é o 1º elemento
+	max = vals[0]; 
+
+// temos que provar comparando cada el do array e
+// actualizando a var maximo
+
+	for (i = 1; i < NUM_ELS; i++)
+	{
+		if (vals[i] > max)
+
+			max = vals[i];
+	}
+
+	return max;
+} // fecha calc_maximo
+
+// Func para calcular e devolver o valor minimo
+float calc_minimo(float valores[])
+{
+	float min;
+	int i;
+
+// vamos dizer que o valor minimo é o 1º elemento
+	min = valores[0]; 
+
+// temos que provar comparando cada el do array e
+// actualizando a var maximo
+
+	for (i = 1; i < NUM_ELS; i++)
+	{
+		if (valores[i] < min)
+
+			min = valores[i];
+	}
+
+	return min;
+
+}  // fecha calc_minimo
+
+
+
+int main()
+{
+	float temps[NUM_ELS];
+	float soma, media, maximo, minimo;
+
+	int i; // índice de posição
+
+// carregar o array
+	for (i = 0; i < NUM_ELS; i++)
+	{
+		printf("\n\nDigite a temperatura %d: ", i);
+		fflush(stdin);
+		scanf("%f", &temps[i]);
+	}
+
+// visualizar array
+	printf("\n\n Eis o array digitado: \n\n");
+
+	for (i = 0; i < NUM_ELS; i++)
+	{
+		printf("\n %4.2f", temps[i]);
+	}
+	
+// chama func para calcular a média do array
+	media = calc_media(temps);
+	printf("\n\n A Media do array = %4.2f", media);
+
+// calcular valor máximo
+// chama func para calcular o valor maximo
+	maximo = calc_maximo(temps);
+	printf("\n\n O valor maximo = %4.2f", maximo);
+
+// calcular valor minimo
+// chama uma func para calcular o valor minimo
+	minimo = calc_minimo(temps);
+	printf("\n\n O valor minimo = %4.2f", minimo);
+	
+	printf("\n\nDigite um carater para continuar\n\n");
+	fflush(stdin);	
+	getchar();
+
+	return 0;
+} // fecha o main

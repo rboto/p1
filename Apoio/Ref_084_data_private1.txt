@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+
+// Programa Ref_084_data_private1
+
+// Data member private
+
+// Somente podem ser acedidos a partir de dentro da 
+// própria classe.
+
+// A partir de fora da classe, os dados private somente
+// podem ser acedidos através de métodos públicos da
+// classe que servem assim de interface entre os dados 
+// private da classe e os objetos interessados no seu
+// acesso.
+// Estes métodos de interface têm o nome genérico de
+// getters e setters.
+
+// Quando o especificador de acesso não é especificado
+// então os dados são private por defeito
+
+class pessoa
+{
+private: // desnecessária esta especificação (já são por defeito)
+
+	unsigned short int idade; 
+
+public:
+
+	// serve para atribuir (Set) valor ao data member idade
+	void setIdade(unsigned short int i)
+	{
+		idade = i;
+	}
+
+	// serve para ler (Get) o valor do data member idade
+	int getIdade()
+	{
+		return idade;
+	}
+
+	// serve para imprimir data member idade
+	void prIdade()
+	{
+		 cout << endl << "A idade = " << idade << endl;
+	}
+};
+
+int main()
+{
+	pessoa pess; // objeto pess
+
+// atribui valor ao private data member idade
+// através de um método público
+	
+	pess.setIdade(25);
+
+// print o valor da idade de duas maneiras diferentes
+	pess.prIdade(); // através do método prIdade
+
+	cout << endl << endl << "Idade = " 
+		<< pess.getIdade() << endl << endl; // através de um getter
+	
+	cout << "Digite uma tecla para sair" << endl << endl << endl;
+	fflush(stdin);
+	getchar();
+
+	return 0;
+}
+

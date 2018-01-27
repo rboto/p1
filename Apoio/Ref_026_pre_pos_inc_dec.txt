@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Programa Ref_026_pre_pos_inc_dec
+
+/*   
+  Pré e pós incrementos/decrementos
+
+  A var é incrementada/decremantada uma unidade, afectando
+  o seu valor na memória.
+
+  No pré a var é actualizada antes da sua interveniencia
+  em qualquer operação (aritmética, lógica, relacional, 
+  de atribuição, impressão, etc.).
+
+  Exemplos de pré:
+
+  k = 5
+  ++k incrementa efetivamente (mesmo que k = k + 1) k de 5 
+      para 6 antes da sua interveniência em qualquer operação.
+
+  k = 10
+  --k decrementa efetivamente (mesmo que k = k - 1) k de 10 
+      para 9 antes da sua interveniência em qualquer operação.
+
+
+Exemplos de pós:
+
+  k = 5
+  k++ incrementa efetivamente (mesmo que k = k + 1) k de 5 
+      para 6 após a sua interveniência em qualquer operação.
+
+  k = 10
+  k-- decrementa efetivamente (mesmo que k = k - 1) k de 10 
+      para 9 após a sua interveniência em qualquer operação.
+*/
+
+
+// Exemplos reais
+
+int main()
+{
+	int i, j, k, w;
+
+	i = 2;
+	k = 4;
+
+	w = ++i * k++;
+
+	printf("\nw = %d", w);
+	printf("\ni = %d", i);
+	printf("\nk = %d", k);
+
+
+	printf("\n\n\n");
+	i = 0;
+	k = 2;
+	j = 1;
+
+	w = i++ + --k + ++j;
+
+	printf("\nw = %d", w);
+	printf("\ni = %d", i);
+	printf("\nk = %d", k);
+	printf("\nj = %d", j);
+
+	printf("\n\n");
+	system("PAUSE"); 
+	
+	return 0;
+}
