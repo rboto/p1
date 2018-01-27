@@ -27,21 +27,21 @@ char ch;
 
 //funções
 
-int atrisbn() {
+long atrisbn(FILE **fp, struct livro liv) {
 
-	int isbn = 0;	
+	long isbn = 0;	
 
-	fp = fopen("dados.dat", "r");
+	*fp = fopen("dados.dat", "r");
 	
-	while (fread(&liv, sizeof(liv), 1, fp))
+	while (fread(&liv, sizeof(liv), 1, *fp))
 	{
 		isbn++;
 	}
 
-	fclose(fp);
+	fclose(*fp);
 
 	//system("PAUSE");
-	return isbn + 1;
+	return isbn;
 };
 
 
@@ -85,7 +85,7 @@ int listar() {
 	return 0;
 };
 
-int inserir() {
+int inserir(long total, FILE **fp) {
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Inserir" << endl;
@@ -95,7 +95,7 @@ int inserir() {
 
 	
 	//abre ficheiro
-	fp = fopen("dados.dat", "a");
+	*fp = fopen("dados.dat", "a");
 	
 	//dormir aqui? Sleep(3000);
 	
@@ -116,8 +116,10 @@ int inserir() {
 			// nota - não estamos a validar a introdução. experimentem ver a opção consultar, visto
 			// se inserirem espaços/ENTER ele guarda isso tudo no ficheiro e a consulta/listagem fica "feia"
 
-			liv.num = atrisbn();			
-			printf("\n\n\nISBN: %ld", liv.num);
+			
+			//liv.num = 60;
+			liv.num = ++total;			
+			//printf("\n\n\nISBN: %ld", liv.num);
 
 			// HELP - não consigo que a pergunta "titulo do livro" funcione no visual studio
 			// :( Simplesmente salta para a pergunta seguinte
@@ -138,7 +140,7 @@ int inserir() {
 			scanf("%f", &liv.valor);
 			//printf("\nValor: %4.2f", liv.valor);
 			
-			fwrite(&liv, sizeof(liv), 1, fp);
+			fwrite(&liv, sizeof(liv), 1, *fp);
 
 			// o ESC está a gerar loop no menu inicial é preciso perceber porquê
 			printf("\n\nClique em ESC para sair\n\n");
@@ -150,7 +152,7 @@ int inserir() {
 
 		// fecha ficheiro que estava aberto para escrita-append
 
-		fclose(fp);
+		fclose(*fp);
 
 
 	system("PAUSE");
@@ -213,6 +215,7 @@ int main() {
 
 	//validar se precisamos de repetir o menu
 	bool repetirmenu = true;
+	int total = 0;
 	
 	//repete o menu em loop
 	while (repetirmenu = true) {
@@ -245,12 +248,11 @@ int main() {
 
 					break;
 				case 2:
-					inserir();
-
+					total = atrisbn(&fp, liv);
+					inserir(total, &fp);
 					break;
 				case 3:
 					alterar();
-
 					break;
 				case 4:
 					consultar();
