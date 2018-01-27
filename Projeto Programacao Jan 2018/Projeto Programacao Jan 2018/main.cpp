@@ -45,7 +45,7 @@ long atrisbn(FILE **fp, struct livro liv) {
 };
 
 
-int listar() {
+int listar(FILE **fp) {
 	//estudar melhor os REF 74 & 72, pois esta função não está a funcionar bem
 	//exemplo: há neste momento dois registos - 123 e 1234 - se escrevermos 1 ele devolve o primeiro
 	//se escrevermos 1234 ele só devolve o 123
@@ -59,7 +59,7 @@ int listar() {
 	// aceder e ler um registo especifico  
 	// fazer reset do ptr do fich para o inicio
 
-	fp = fopen("dados.dat", "r");
+	*fp = fopen("dados.dat", "r");
 
 	printf("\n\n\nDigite o numero do registo que pretenda ler: ");
 
@@ -68,10 +68,10 @@ int listar() {
 
 	// posicionar-se
 
-	fseek(fp, (long)(salto - 1) * sizeof(liv), SEEK_SET);
+	fseek(*fp, (long)(salto - 1) * sizeof(liv), SEEK_SET);
 
 	// ler o reg localizado 
-	fread(&liv, sizeof(liv), 1, fp);
+	fread(&liv, sizeof(liv), 1, *fp);
 
 	// mostrar o reg seleccionado
 	printf("\nISBN: %ld", liv.num);
@@ -79,7 +79,7 @@ int listar() {
 	printf("\nAutor: %s", liv.autor);
 	printf("\nValor: %4.2f\n\n\n", liv.valor);
 
-	fclose(fp);
+	fclose(*fp);
 
 	system("PAUSE");
 	return 0;
@@ -228,7 +228,7 @@ int main() {
 		cout << "\n\t1. Listar" << endl;
 		cout << "\n\t2. Inserir" << endl;
 		cout << "\n\t3. Alterar" << endl;
-		cout << "\n\t4. Consultar" << endl;
+		cout << "\n\t4. Procurar(consultar)" << endl;
 		cout << "\n\t5. Eliminar" << endl;		
 		cout << "\n\tOpção: ";
 		cin >> escolhamenu;
@@ -244,8 +244,7 @@ int main() {
 
 			switch (escolhamenu) {
 				case 1:
-					listar();
-
+					consultar();
 					break;
 				case 2:
 					total = atrisbn(&fp, liv);
@@ -255,12 +254,10 @@ int main() {
 					alterar();
 					break;
 				case 4:
-					consultar();
-
+					listar(&fp);
 					break;
 				case 5:
 					eliminar();
-
 					break;
 				default:
 					cout << "Não escolheu uma opção válida. Tente novamente." << endl;
