@@ -203,16 +203,19 @@ int eliminar(FILE **fp) {
 	struct livro registo;
 	FILE *fp_tmp;
 
+	*fp = fopen("dados.dat", "a");
+	fp_tmp = fopen("tmp.dat", "a");
+
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Eliminar" << endl;
 	cout << "\n######################" << endl;
 	
 	cout << "Introduza registo a apagar: ";
+	while (getchar() != '\n');
 	fgets(regapagar,30, stdin);
 
-	*fp = fopen("dados.dat", "r");
-	fp_tmp = fopen("tmp.dat", "r");
+	
 
 	/*ofstream o;
 	o.open("new.dat", ios::out | ios::binary);
@@ -243,18 +246,20 @@ int eliminar(FILE **fp) {
 			}
 			fil.read((char*)&fileobj, sizeof(fileobj));
 		}*/
-		while (fread(regapagar, sizeof(livro), 1, *fp) != NULL) {
+		while (fread(regapagar, sizeof(struct livro), 1, *fp) != NULL) {
 			if (strcmp(regapagar, registo.nome) == 0) {
 				printf("A record with requested name found and deleted.\n\n");
+				printf("tou aqui 1");
 				regencontrado = 1;
 			}
 			else {
-				//rebenta aqui neste fwrite
-				fwrite(&registo, sizeof(livro), 1, fp_tmp);
+				
+				fwrite(&registo, sizeof(struct livro), 1, fp_tmp);
 			}
 		}
 		if (!regencontrado) {
 			printf("No record(s) found with the requested name: %s\n\n", regapagar);
+			printf("tou aqui 2");
 		}
 	}
 	/*o.close();
