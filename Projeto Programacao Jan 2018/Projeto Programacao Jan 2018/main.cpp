@@ -70,7 +70,7 @@ int listar(FILE **fp) {
 
 	fseek(*fp, (long)(salto - 1) * sizeof(liv), SEEK_SET);
 
-	// ler o reg localizado 
+	// ler o reg localizado
 	fread(&liv, sizeof(liv), 1, *fp);
 
 	// mostrar o reg seleccionado
@@ -196,11 +196,76 @@ int consultar() {
 	return 0;
 };
 
-int eliminar() {
+int eliminar(FILE **fp) {
+	char regapagar[30];
+	int regencontrado = 0;
+	int salto;
+	struct livro registo;
+	FILE *fp_tmp;
+
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Eliminar" << endl;
 	cout << "\n######################" << endl;
+	
+	cout << "Introduza registo a apagar: ";
+	fgets(regapagar,30, stdin);
+
+	*fp = fopen("dados.dat", "r");
+	fp_tmp = fopen("tmp.dat", "r");
+
+	/*ofstream o;
+	o.open("new.dat", ios::out | ios::binary);
+	fil.open("binary.dat", ios::in | ios::binary);*/
+	if (*fp == NULL)
+	{
+		cout << "ERRO!\nO Ficheiro não foi aberto.\n" << endl;
+
+		cout << "\n\nDigite uma tecla para terminar Programa\n" << endl;
+
+		cout.flush();
+		ch = getchar();
+		exit(0);
+	}
+	else
+	{
+		//fseek(*fp, (long)(salto - 1) * sizeof(liv), SEEK_SET);
+		/*while (fread(&liv, sizeof(liv), 1, fp))
+		{
+			if (strcmp(regapagar, fileobj.getn()) != 0)
+			{
+				o.write((char*)&fileobj, sizeof(fileobj));
+			}
+			else
+			{
+				cout << "Press Any Key....For Search" << endl;
+				getch();
+			}
+			fil.read((char*)&fileobj, sizeof(fileobj));
+		}*/
+		while (fread(regapagar, sizeof(livro), 1, *fp) != NULL) {
+			if (strcmp(regapagar, registo.nome) == 0) {
+				printf("A record with requested name found and deleted.\n\n");
+				regencontrado = 1;
+			}
+			else {
+				//rebenta aqui neste fwrite
+				fwrite(&registo, sizeof(livro), 1, fp_tmp);
+			}
+		}
+		if (!regencontrado) {
+			printf("No record(s) found with the requested name: %s\n\n", regapagar);
+		}
+	}
+	/*o.close();
+	fil.close();*/
+	fclose(*fp);
+	fclose(fp_tmp);
+	remove("dados.dat");
+	rename("new.dat", "dados.dat");
+
+
+
 	system("PAUSE");
 	return 0;
 }
@@ -257,7 +322,7 @@ int main() {
 					listar(&fp);
 					break;
 				case 5:
-					eliminar();
+					eliminar(&fp);
 					break;
 				default:
 					cout << "Não escolheu uma opção válida. Tente novamente." << endl;
