@@ -1,8 +1,3 @@
-
-//**************************
-// ref 073 como referencia
-//**************************
-
 #include <iostream>
 #include <stdio.h>
 #include <conio.h>
@@ -310,7 +305,7 @@ int eliminar(FILE **fp) {
 		}
 		if (!regencontrado) {
 			printf("No record(s) found with the requested name: %s\n\n", regapagar);
-			printf("tou aqui 2");
+			printf("tou aqui 2"); //adoro estes comentários ahahaha
 		}
 	}
 	/*o.close();
@@ -394,3 +389,4 @@ int main() {
 	return 0;
 		
 };
+
