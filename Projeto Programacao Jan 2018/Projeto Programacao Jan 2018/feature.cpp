@@ -86,7 +86,7 @@ int procurar() {
 			}
 		case '2':
 			
-			char nome_proc[20];
+			char nome_proc[30];
 			system("cls");
 			printf("\n\n\nDigite o nome do livro: ");
 			fflush(stdin);
@@ -95,7 +95,7 @@ int procurar() {
 			salto = 0;
 			while(fread(&liv, sizeof(liv), 1, fp)==1) {
 				
-				if(strcmp(liv.nome,(nome_proc))==0){
+				if(strncmp(liv.nome,nome_proc, sizeof(liv.nome))==0){
 					printf("\nISBN: %ld", liv.num);
 					printf("\nNome: %s", liv.nome);
 					printf("\nAutor: %s", liv.autor);
