@@ -42,9 +42,6 @@ long atrisbn(FILE **fp, struct livro liv) {
 
 
 int procurar() {
-	//estudar melhor os REF 74 & 72, pois esta função não está a funcionar bem
-	//exemplo: há neste momento dois registos - 123 e 1234 - se escrevermos 1 ele devolve o primeiro
-	//se escrevermos 1234 ele só devolve o 123
 
 	int salto, opc;
 	char encontralivro;
@@ -84,7 +81,7 @@ int procurar() {
 					return procurar();
 				} else {
 					return 0;
-					break;
+					//break;
 				}	
 			}
 		case '2':
@@ -95,7 +92,7 @@ int procurar() {
 			fflush(stdin);
 			scanf("%s",nome_proc);
 			
-			int salto = 0;
+			salto = 0;
 			while(fread(&liv, sizeof(liv), 1, fp)==1) {
 				
 				if(strcmp(liv.nome,(nome_proc))==0){
@@ -105,24 +102,21 @@ int procurar() {
 					printf("\nValor: %4.2f\n\n\n", liv.valor);
 					salto++;			
 				}
+			}
 				
-				if(salto==0){
-					printf("\nNome não encontrado.");
-					printf("\nDeseja procurar novamente? (S/N)");
-					if(getch()=='s'){
-						return procurar();
-					} else {
-						return 0;
-						break;
-					}	
-					
-				}
-		}
-		
-//		default:
-//			getch();
-//			procurar();		
-		
+			if(salto==0){
+				printf("\nNome não encontrado.");
+				printf("\nDeseja procurar novamente? (S/N)");
+				if(getch()=='s'){
+					return procurar();
+				} else {
+					return 0;
+					//break;
+				}	
+				
+			}
+			
+				
 	}
 	
 	fclose(fp);
