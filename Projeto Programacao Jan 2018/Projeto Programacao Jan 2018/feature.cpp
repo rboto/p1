@@ -44,7 +44,7 @@ long atrisbn(FILE **fp, struct livro liv) {
 int procurar() {
 
 	int salto;
-	char encontralivro;
+	char *encontralivro = "KO";
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Procurar" << endl;
@@ -70,11 +70,13 @@ int procurar() {
 					printf("\nNome: %s", liv.nome);
 					printf("\nAutor: %s", liv.autor);
 					printf("\nValor: %4.2f\n\n\n", liv.valor);
-					encontralivro = 'OK'; //verificação se encontra						
+					printf("\n%s teste",encontralivro );
+					encontralivro = "OK"; //verificação se encontra	
+					printf("\n%s",encontralivro );				
 				}
 		
 			}
-			if(encontralivro != 'OK'){
+			if(encontralivro != "OK"){
 				printf("\nISBN não encontrado.");
 				printf("\nDeseja procurar novamente? (S/N)");
 				if(getch()=='s'){
@@ -84,17 +86,18 @@ int procurar() {
 					//break;
 				}	
 			}
+			break;
+			
 		case '2':
 			
 			char nome_proc[30];
 			system("cls");
 			printf("\n\n\nDigite o nome do livro: ");
 			fflush(stdin);
-			scanf("%s",nome_proc); 
+			fgets(nome_proc, 30, stdin);
 			
 			salto = 0;
 			while(fread(&liv, sizeof(liv), 1, fp)==1) {
-				printf("\n####\n"); printf("\n%s", liv.nome); printf("%ld", sizeof(liv.nome)); printf("\n%s", nome_proc); printf("%ld", sizeof(nome_proc));
 				
 				if(strcmp(liv.nome,nome_proc)==0){
 					printf("\nISBN: %ld", liv.num);
@@ -104,7 +107,6 @@ int procurar() {
 					salto++;			
 				}
 			}
-				
 			if(salto==0){
 				printf("\nNome não encontrado.");
 				printf("\nDeseja procurar novamente? (S/N)");
@@ -202,7 +204,7 @@ int inserir(long total, FILE **fp) {
 
 int alterar() {
 	int salto;
-	char encontralivro;
+	char *encontra = "KO";
 	char cont_procurar;
 	system("cls");
 	cout << "######################" << endl;
@@ -217,18 +219,24 @@ int alterar() {
 		cout << "Introduza a ID do livro a alterar:" << endl;
 		fflush(stdin);
 		scanf("%d", &salto);
-		fp = fopen("dados.dat", "rw");
-		rewind(fp);
-		encontralivro = 'KO';
+		printf("\nsalto=%d",salto);
+		fp=fopen("dados.dat","r+");
+
+
+//		fp = fopen("dados.dat", "rw");
+
+		//encontralivro = "KO";
 	
-		while(fread(&liv, sizeof(liv), 1, fp)==1) {	
+		while(fread(&liv, sizeof(liv), 1, fp)==1) {
+			printf("\nliv.num=%d",liv.num);	printf("\nsalto=%d",salto);
 			if(liv.num == salto){			
-				system("cls");
+				//system("cls");
+				encontra="OK";
 				printf("\nLivro com o ISBN: %ld encontrado", liv.num);
 				printf("\n\t1.Nome: %s", liv.nome);
 				printf("\n\t2.Autor: %s", liv.autor);
 				printf("\n\t3.Valor: %4.2f\n\n\n", liv.valor);
-				printf("Escolha a opção que pretende alterar.");
+				//printf("Escolha a opção que pretende alterar.");
 				
 				printf("\n\nDigite o novo Título do livro:"); 
 				fflush(stdin);
@@ -265,15 +273,18 @@ int alterar() {
 				*/
 			
 				printf("\nRegisto atualizado.");
+				fclose(fp);
+				fp=fopen("dados.dat","rb+");
 				fseek(fp,ftell(fp)-sizeof(liv),0);
 				fwrite(&liv, sizeof(liv), 1, fp);
 				fclose(fp);
-				encontralivro = 'OK';
+				//break;
 			}
-	
-			if(encontralivro != 'OK') printf("\nISBN não encontrado.");					
+			
+			
    		}	
-		
+		if(encontra != "OK") printf("\nISBN não encontrado.");
+							
 		printf("\n\nDeseja procurar novamente ou modificar outro registo (S/N)");
 	    fflush(stdin);
 	   	cont_procurar=getch();
