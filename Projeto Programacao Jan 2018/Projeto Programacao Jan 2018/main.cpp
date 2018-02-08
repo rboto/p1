@@ -1,8 +1,3 @@
-
-//**************************
-// ref 073 como referencia
-//**************************
-
 #include <iostream>
 #include <stdio.h>
 #include <conio.h>
@@ -30,10 +25,10 @@ char ch;
 
 long atrisbn(FILE **fp, struct livro liv) {
 
-	long isbn = 0;	
+	long isbn = 0;
 
 	*fp = fopen("dados.dat", "r");
-	
+
 	while (fread(&liv, sizeof(liv), 1, *fp))
 	{
 		isbn++;
@@ -47,12 +42,9 @@ long atrisbn(FILE **fp, struct livro liv) {
 
 
 int procurar() {
-	//estudar melhor os REF 74 & 72, pois esta função não está a funcionar bem
-	//exemplo: há neste momento dois registos - 123 e 1234 - se escrevermos 1 ele devolve o primeiro
-	//se escrevermos 1234 ele só devolve o 123
 
-	int salto, opc;
-	char encontralivro;
+	int salto;
+	int encontralivro = 0;
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Procurar" << endl;
@@ -61,75 +53,77 @@ int procurar() {
 	cout << "1. Procurar por ISBN" << endl;
 	cout << "2.Procurar por nome" << endl;
 	cout << "Escolha a opção:" << endl;
-	
+
 	fp = fopen("dados.dat", "r");
 	rewind(fp);
 
-	switch(getch()){
-		
-		case '1': 
-			system("cls");
-			printf("\n\n\nDigite o numero do registo que pretenda ler: ");
-			fflush(stdin);
-			scanf("%d", &salto);
-			while(fread(&liv, sizeof(liv), 1, fp)==1) {	
-				if(liv.num == salto){			
-					printf("\nISBN: %ld", liv.num);
-					printf("\nNome: %s", liv.nome);
-					printf("\nAutor: %s", liv.autor);
-					printf("\nValor: %4.2f\n\n\n", liv.valor);
-					encontralivro = 'OK'; //verificação se encontra						
-				}
-		
+	switch (_getch()) {
+
+	case '1':
+		system("cls");
+		printf("\n\n\nDigite o numero do registo que pretenda ler: ");
+		fflush(stdin);
+		scanf("%d", &salto);
+		while (fread(&liv, sizeof(liv), 1, fp) == 1) {
+			if (liv.num == salto) {
+				printf("\nISBN: %ld", liv.num);
+				printf("\nNome: %s", liv.nome);
+				printf("\nAutor: %s", liv.autor);
+				printf("\nValor: %4.2f\n\n\n", liv.valor);
+				encontralivro = 1; //verificação se encontra	
+				printf("\n%d", encontralivro);
 			}
-			if(encontralivro != 'OK'){
-				printf("\nISBN não encontrado.");
-				printf("\nDeseja procurar novamente? (S/N)");
-				if(getch()=='s'){
-					return procurar();
-				} else {
-					return 0;
-					break;
-				}	
-			}
-		case '2':
-			
-			char nome_proc[20];
-			system("cls");
-			printf("\n\n\nDigite o nome do livro: ");
-			fflush(stdin);
-			scanf("%s",nome_proc);
-			
-			int salto = 0;
-			while(fread(&liv, sizeof(liv), 1, fp)==1) {
-				
-				if(strcmp(liv.nome,(nome_proc))==0){
-					printf("\nISBN: %ld", liv.num);
-					printf("\nNome: %s", liv.nome);
-					printf("\nAutor: %s", liv.autor);
-					printf("\nValor: %4.2f\n\n\n", liv.valor);
-					salto++;			
-				}
-				
-				if(salto==0){
-					printf("\nNome não encontrado.");
-					printf("\nDeseja procurar novamente? (S/N)");
-					if(getch()=='s'){
-						return procurar();
-					} else {
-						return 0;
-						break;
-					}	
-					
-				}
+
 		}
-		
-//		default:
-//			getch();
-//			procurar();		
-		
+		if (encontralivro != 1) {
+			printf("\nISBN não encontrado.");
+			printf("\nDeseja procurar novamente? (S/N)");
+			if (_getch() == 's') {
+				return procurar();
+			}
+			else {
+				return 0;
+				//break;
+			}
+		}
+		break;
+
+	case '2':
+
+		char nome_proc[30];
+		system("cls");
+		printf("\n\n\nDigite o nome do livro: ");
+		fflush(stdin);
+		fgets(nome_proc, 30, stdin);
+
+		salto = 0;
+		while (fread(&liv, sizeof(liv), 1, fp) == 1) {
+
+			if (strcmp(liv.nome, nome_proc) == 0) {
+				printf("\nISBN: %ld", liv.num);
+				printf("\nNome: %s", liv.nome);
+				printf("\nNome: %s", liv.nome);
+				printf("\nAutor: %s", liv.autor);
+				printf("\nValor: %4.2f\n\n\n", liv.valor);
+				salto++;
+			}
+		}
+		if (salto == 0) {
+			printf("\nNome não encontrado.");
+			printf("\nDeseja procurar novamente? (S/N)");
+			if (_getch() == 's') {
+				return procurar();
+			}
+			else {
+				return 0;
+				//break;
+			}
+
+		}
+
+
 	}
-	
+
 	fclose(fp);
 
 	system("PAUSE");
@@ -211,13 +205,95 @@ int inserir(long total, FILE **fp) {
 };
 
 int alterar() {
+	int salto;
+	int encontra = 0;
+	char cont_procurar;
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Alterar" << endl;
 	cout << "\n######################" << endl;
+	cout << endl << endl;
+
+	cont_procurar = 's';
+
+	while (cont_procurar == 's') {
+
+		cout << "Introduza a ID do livro a alterar:" << endl;
+		fflush(stdin);
+		scanf("%d", &salto);
+		printf("\nsalto=%d", salto);
+		fp = fopen("dados.dat", "r+");
+
+
+		//		fp = fopen("dados.dat", "rw");
+
+		//encontralivro = "KO";
+
+		while (fread(&liv, sizeof(liv), 1, fp) == 1) {
+			printf("\nliv.num=%d", liv.num);	printf("\nsalto=%d", salto);
+			if (liv.num == salto) {
+				//system("cls");
+				encontra = 1;
+				printf("\nLivro com o ISBN: %ld encontrado", liv.num);
+				printf("\n\t1.Nome: %s", liv.nome);
+				printf("\n\t2.Autor: %s", liv.autor);
+				printf("\n\t3.Valor: %4.2f\n\n\n", liv.valor);
+				//printf("Escolha a opção que pretende alterar.");
+
+				printf("\n\nDigite o novo Título do livro:");
+				fflush(stdin);
+				scanf("%s", liv.nome);
+
+				printf("\n\nDigite o novo Autor do livro: ");
+				fflush(stdin);
+				scanf("%s", liv.autor);
+
+				printf("\n\nDigite o novo valor do livro: ");
+				fflush(stdin);
+				scanf("%f", &liv.valor);
+
+
+
+				/*
+				switch(getch()){
+				case '1':
+				printf("\n\nDigite o novo Título do livro:");
+				fflush(stdin);
+				scanf("%s", liv.nome);
+				break;
+				case '2':
+				printf("\n\nDigite o novo Autor do livro: ");
+				fflush(stdin);
+				scanf("%s", liv.autor);
+				break;
+				case '3':
+				printf("\n\nDigite o novo valor do livro: ");
+				fflush(stdin);
+				scanf("%f", &liv.valor);
+				}
+
+				*/
+
+				printf("\nRegisto atualizado.");
+				fclose(fp);
+				fp = fopen("dados.dat", "rb+");
+				fseek(fp, ftell(fp) - sizeof(liv), 0);
+				fwrite(&liv, sizeof(liv), 1, fp);
+				fclose(fp);
+				//break;
+			}
+
+
+		}
+		if (encontra != 1) printf("\nISBN não encontrado.");
+
+		printf("\n\nDeseja procurar novamente ou modificar outro registo (S/N)");
+		fflush(stdin);
+		cont_procurar = _getch();
+	}
 	system("PAUSE");
 	return 0;
-};
+}
 
 int consultar() {
 	system("cls");
@@ -245,87 +321,57 @@ int consultar() {
 
 	system("PAUSE");
 	return 0;
-};
+}
 
-int eliminar(FILE **fp) {
-	char regapagar[30];
+
+int eliminar() {
 	int regencontrado = 0;
 	int salto;
 	struct livro registo;
 	FILE *fp_tmp;
 
-	*fp = fopen("dados.dat", "a");
-	fp_tmp = fopen("tmp.dat", "a");
+	fp = fopen("dados.dat", "rw");
+	fp_tmp = fopen("tmp.dat", "w");
 
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Eliminar" << endl;
 	cout << "\n######################" << endl;
-	
-	cout << "Introduza registo a apagar: ";
-	while (getchar() != '\n');
-	fgets(regapagar,30, stdin);
 
-	
+	cout << "Introduza a ID do livro a apagar:" << endl;
+	fflush(stdin);
+	scanf("%d", &salto);
 
-	/*ofstream o;
-	o.open("new.dat", ios::out | ios::binary);
-	fil.open("binary.dat", ios::in | ios::binary);*/
-	if (*fp == NULL)
+
+	if (fp == NULL)
 	{
 		cout << "ERRO!\nO Ficheiro não foi aberto.\n" << endl;
 
 		cout << "\n\nDigite uma tecla para terminar Programa\n" << endl;
 
 		cout.flush();
-		ch = getchar();
+		ch = _getch();
 		exit(0);
 	}
-	else
-	{
-		//fseek(*fp, (long)(salto - 1) * sizeof(liv), SEEK_SET);
-		/*while (fread(&liv, sizeof(liv), 1, fp))
-		{
-			if (strcmp(regapagar, fileobj.getn()) != 0)
-			{
-				o.write((char*)&fileobj, sizeof(fileobj));
-			}
-			else
-			{
-				cout << "Press Any Key....For Search" << endl;
-				getch();
-			}
-			fil.read((char*)&fileobj, sizeof(fileobj));
-		}*/
-		while (fread(regapagar, sizeof(struct livro), 1, *fp) != NULL) {
-			if (strcmp(regapagar, registo.nome) == 0) {
-				printf("A record with requested name found and deleted.\n\n");
-				printf("tou aqui 1");
-				regencontrado = 1;
-			}
-			else {
-				
-				fwrite(&registo, sizeof(struct livro), 1, fp_tmp);
-			}
-		}
-		if (!regencontrado) {
-			printf("No record(s) found with the requested name: %s\n\n", regapagar);
-			printf("tou aqui 2");
-		}
-	}
-	/*o.close();
-	fil.close();*/
-	fclose(*fp);
+
+	while (fread(&liv, sizeof(liv), 1, fp) == 1){
+		
+		if(liv.num != salto){
+			
+			fwrite(&liv, sizeof(liv), 1, fp_tmp);
+			
+		} 	
+		
+	}	
+
+	fclose(fp);
 	fclose(fp_tmp);
 	remove("dados.dat");
-	rename("new.dat", "dados.dat");
-
-
+	rename("tmp.dat", "dados.dat");
 
 	system("PAUSE");
 	return 0;
 }
-
 
 
 
@@ -337,7 +383,7 @@ int main() {
 	//validar se precisamos de repetir o menu
 	bool repetirmenu = true;
 	int total = 0;
-	
+
 	//repete o menu em loop
 	while (repetirmenu = true) {
 		int escolhamenu;
@@ -350,7 +396,7 @@ int main() {
 		cout << "\n\t2. Inserir" << endl;
 		cout << "\n\t3. Alterar" << endl;
 		cout << "\n\t4. Procurar(consultar)" << endl;
-		cout << "\n\t5. Eliminar" << endl;		
+		cout << "\n\t5. Eliminar" << endl;
 		cout << "\n\tOpção: ";
 		cin >> escolhamenu;
 
@@ -364,33 +410,33 @@ int main() {
 		else {
 
 			switch (escolhamenu) {
-				case 1:
-					consultar();
-					break;
-				case 2:
-					total = atrisbn(&fp, liv);
-					inserir(total, &fp);
-					break;
-				case 3:
-					alterar();
-					break;
-				case 4:
-					procurar();
-					break;
-				case 5:
-					eliminar(&fp);
-					break;
-				default:
-					cout << "Não escolheu uma opção válida. Tente novamente." << endl;
-					system("pause");
+			case 1:
+				consultar();
+				break;
+			case 2:
+				total = atrisbn(&fp, liv);
+				inserir(total, &fp);
+				break;
+			case 3:
+				alterar();
+				break;
+			case 4:
+				procurar();
+				break;
+			case 5:
+				eliminar();
+				break;
+			default:
+				cout << "Não escolheu uma opção válida. Tente novamente." << endl;
+				system("pause");
 
-			}			
-		}		
+			}
+		}
 	}
 
-	
 
 	system("PAUSE");
 	return 0;
-		
+
 };
+
