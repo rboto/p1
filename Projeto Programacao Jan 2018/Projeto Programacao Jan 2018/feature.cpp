@@ -44,7 +44,7 @@ long atrisbn(FILE **fp, struct livro liv) {
 int procurar() {
 
 	int salto;
-	char *encontralivro = "KO";
+	int encontralivro = 0;
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Procurar" << endl;
@@ -57,7 +57,7 @@ int procurar() {
 	fp = fopen("dados.dat", "r");
 	rewind(fp);
 
-	switch(getch()){
+	switch(_getch()){
 		
 		case '1': 
 			system("cls");
@@ -70,16 +70,16 @@ int procurar() {
 					printf("\nNome: %s", liv.nome);
 					printf("\nAutor: %s", liv.autor);
 					printf("\nValor: %4.2f\n\n\n", liv.valor);
-					printf("\n%s teste",encontralivro );
-					encontralivro = "OK"; //verificação se encontra	
-					printf("\n%s",encontralivro );				
+					printf("\n%d teste",encontralivro );
+					encontralivro = 1; //verificação se encontra	
+					printf("\n%d",encontralivro );				
 				}
 		
 			}
-			if(encontralivro != "OK"){
+			if(encontralivro != 1){
 				printf("\nISBN não encontrado.");
 				printf("\nDeseja procurar novamente? (S/N)");
-				if(getch()=='s'){
+				if(_getch()=='s'){
 					return procurar();
 				} else {
 					return 0;
@@ -110,7 +110,7 @@ int procurar() {
 			if(salto==0){
 				printf("\nNome não encontrado.");
 				printf("\nDeseja procurar novamente? (S/N)");
-				if(getch()=='s'){
+				if(_getch()=='s'){
 					return procurar();
 				} else {
 					return 0;
@@ -149,7 +149,7 @@ int inserir(long total, FILE **fp) {
 		cout << "\n\nDigite uma tecla para terminar Programa\n" << endl;
 
 		cout.flush();		
-		ch = getchar();
+		ch = _getch();
 		exit(0);
 	}
 		
@@ -168,7 +168,7 @@ int inserir(long total, FILE **fp) {
 			// :( Simplesmente salta para a pergunta seguinte
 			
 			printf("\n\nDigite o Titulo do livro:");
-			while (getchar() != '\n');
+			while (_getch() != '\n');
 			fgets(liv.nome, 30, stdin);
 			// fgets é o gets mas novo e atualizado
 			//printf("\nNome: %s", liv.nome);
@@ -204,7 +204,7 @@ int inserir(long total, FILE **fp) {
 
 int alterar() {
 	int salto;
-	char *encontra = "KO";
+	char encontra = 0;
 	char cont_procurar;
 	system("cls");
 	cout << "######################" << endl;
@@ -231,7 +231,7 @@ int alterar() {
 			printf("\nliv.num=%d",liv.num);	printf("\nsalto=%d",salto);
 			if(liv.num == salto){			
 				//system("cls");
-				encontra="OK";
+				encontra=1;
 				printf("\nLivro com o ISBN: %ld encontrado", liv.num);
 				printf("\n\t1.Nome: %s", liv.nome);
 				printf("\n\t2.Autor: %s", liv.autor);
@@ -283,11 +283,11 @@ int alterar() {
 			
 			
    		}	
-		if(encontra != "OK") printf("\nISBN não encontrado.");
+		if(encontra != 1) printf("\nISBN não encontrado.");
 							
 		printf("\n\nDeseja procurar novamente ou modificar outro registo (S/N)");
 	    fflush(stdin);
-	   	cont_procurar=getch();
+	   	cont_procurar=_getch();
 	}
 	system("PAUSE");
 	return 0;
@@ -321,84 +321,84 @@ int consultar() {
 	return 0;
 };
 
-int eliminar(FILE **fp) {
-	char regapagar[30];
-	int regencontrado = 0;
-	int salto;
-	struct livro registo;
-	FILE *fp_tmp;
-
-	*fp = fopen("dados.dat", "a");
-	fp_tmp = fopen("tmp.dat", "a");
-
-	system("cls");
-	cout << "######################" << endl;
-	cout << "\n\t\tOpção Eliminar" << endl;
-	cout << "\n######################" << endl;
-	
-	cout << "Introduza registo a apagar: ";
-	while (getchar() != '\n');
-	fgets(regapagar,30, stdin);
-
-	
-
-	/*ofstream o;
-	o.open("new.dat", ios::out | ios::binary);
-	fil.open("binary.dat", ios::in | ios::binary);*/
-	if (*fp == NULL)
-	{
-		cout << "ERRO!\nO Ficheiro não foi aberto.\n" << endl;
-
-		cout << "\n\nDigite uma tecla para terminar Programa\n" << endl;
-
-		cout.flush();
-		ch = getchar();
-		exit(0);
-	}
-	else
-	{
-		//fseek(*fp, (long)(salto - 1) * sizeof(liv), SEEK_SET);
-		/*while (fread(&liv, sizeof(liv), 1, fp))
-		{
-			if (strcmp(regapagar, fileobj.getn()) != 0)
-			{
-				o.write((char*)&fileobj, sizeof(fileobj));
-			}
-			else
-			{
-				cout << "Press Any Key....For Search" << endl;
-				getch();
-			}
-			fil.read((char*)&fileobj, sizeof(fileobj));
-		}*/
-		while (fread(regapagar, sizeof(struct livro), 1, *fp) != NULL) {
-			if (strcmp(regapagar, registo.nome) == 0) {
-				printf("A record with requested name found and deleted.\n\n");
-				printf("tou aqui 1");
-				regencontrado = 1;
-			}
-			else {
-				
-				fwrite(&registo, sizeof(struct livro), 1, fp_tmp);
-			}
-		}
-		if (!regencontrado) {
-			printf("No record(s) found with the requested name: %s\n\n", regapagar);
-			printf("tou aqui 2"); //adoro estes comentários ahahaha
-		}
-	}
-	/*o.close();
-	fil.close();*/
-	fclose(*fp);
-	fclose(fp_tmp);
-	remove("dados.dat");
-	rename("new.dat", "dados.dat");
-
-
-
-	system("PAUSE");
-	return 0;
-}
+//int eliminar(FILE **fp) {
+//	char regapagar[30];
+//	int regencontrado = 0;
+//	int salto;
+//	struct livro registo;
+//	FILE *fp_tmp;
+//
+//	*fp = fopen("dados.dat", "a");
+//	fp_tmp = fopen("tmp.dat", "a");
+//
+//	system("cls");
+//	cout << "######################" << endl;
+//	cout << "\n\t\tOpção Eliminar" << endl;
+//	cout << "\n######################" << endl;
+//	
+//	cout << "Introduza registo a apagar: ";
+//	while (_getch() != '\n');
+//	fgets(regapagar,30, stdin);
+//
+//	
+//
+//	/*ofstream o;
+//	o.open("new.dat", ios::out | ios::binary);
+//	fil.open("binary.dat", ios::in | ios::binary);*/
+//	if (*fp == NULL)
+//	{
+//		cout << "ERRO!\nO Ficheiro não foi aberto.\n" << endl;
+//
+//		cout << "\n\nDigite uma tecla para terminar Programa\n" << endl;
+//
+//		cout.flush();
+//		ch = _getchr();
+//		exit(0);
+//	}
+//	else
+//	{
+//		//fseek(*fp, (long)(salto - 1) * sizeof(liv), SEEK_SET);
+//		/*while (fread(&liv, sizeof(liv), 1, fp))
+//		{
+//			if (strcmp(regapagar, fileobj.getn()) != 0)
+//			{
+//				o.write((char*)&fileobj, sizeof(fileobj));
+//			}
+//			else
+//			{
+//				cout << "Press Any Key....For Search" << endl;
+//				getch();
+//			}
+//			fil.read((char*)&fileobj, sizeof(fileobj));
+//		}*/
+//		while (fread(regapagar, sizeof(struct livro), 1, *fp) != NULL) {
+//			if (strcmp(regapagar, registo.nome) == 0) {
+//				printf("A record with requested name found and deleted.\n\n");
+//				printf("tou aqui 1");
+//				regencontrado = 1;
+//			}
+//			else {
+//				
+//				fwrite(&registo, sizeof(struct livro), 1, fp_tmp);
+//			}
+//		}
+//		if (!regencontrado) {
+//			printf("No record(s) found with the requested name: %s\n\n", regapagar);
+//			printf("tou aqui 2"); //adoro estes comentários ahahaha
+//		}
+//	}
+//	/*o.close();
+//	fil.close();*/
+//	fclose(*fp);
+//	fclose(fp_tmp);
+//	remove("dados.dat");
+//	rename("new.dat", "dados.dat");
+//
+//
+//
+//	system("PAUSE");
+//	return 0;
+//}
 
 
 
@@ -452,7 +452,7 @@ int main() {
 					procurar();
 					break;
 				case 5:
-					eliminar(&fp);
+					//eliminar(&fp);
 					break;
 				default:
 					cout << "Não escolheu uma opção válida. Tente novamente." << endl;
