@@ -13,11 +13,12 @@ using namespace std;
 
 
 /*
+ISTEC - Programação I
 Trabalho de grupo elaborado por (ordem alfabética)
-Cátia Sousa nº
-Edgar Basto nº
-Marcos Campos nº 2222
-Rui Boto nº
+Cátia Sousa nº 2242
+Edgar Basto nº 2222
+Marcos Campos nº 2191
+Rui Boto nº 2177
 
 */
 
