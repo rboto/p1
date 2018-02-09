@@ -6,8 +6,20 @@
 #include <cstdlib>
 #include <cstdio>
 #include <string.h>
+//#include <errno.h> //livraria para deteção de erros
+//#include <time.h>
 //#include <WinBase.h>
 using namespace std;
+
+
+/*
+Trabalho de grupo elaborado por (ordem alfabética)
+Cátia Sousa nº
+Edgar Basto nº
+Marcos Campos nº 2222
+Rui Boto nº
+
+*/
 
 struct livro
 {
@@ -36,7 +48,7 @@ long atrisbn(FILE **fp, struct livro liv) {
 
 	fclose(*fp);
 
-	//system("PAUSE");
+
 	return isbn;
 };
 
@@ -71,7 +83,6 @@ int procurar() {
 				printf("\nAutor: %s", liv.autor);
 				printf("\nValor: %4.2f\n\n\n", liv.valor);
 				encontralivro = 1; //verificação se encontra	
-				printf("\n%d", encontralivro);
 			}
 
 		}
@@ -79,11 +90,11 @@ int procurar() {
 			printf("\nISBN não encontrado.");
 			printf("\nDeseja procurar novamente? (S/N)");
 			if (_getch() == 's') {
-				return procurar();
+				return procurar(); 
 			}
 			else {
 				return 0;
-				//break;
+		
 			}
 		}
 		break;
@@ -102,7 +113,6 @@ int procurar() {
 			if (strcmp(liv.nome, nome_proc) == 0) {
 				printf("\nISBN: %ld", liv.num);
 				printf("\nNome: %s", liv.nome);
-				printf("\nNome: %s", liv.nome);
 				printf("\nAutor: %s", liv.autor);
 				printf("\nValor: %4.2f\n\n\n", liv.valor);
 				salto++;
@@ -116,7 +126,7 @@ int procurar() {
 			}
 			else {
 				return 0;
-				//break;
+			
 			}
 
 		}
@@ -135,14 +145,13 @@ int inserir(long total, FILE **fp) {
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Inserir" << endl;
 	cout << "\n######################" << endl;	
-	//o programa ao correr mostra as linhas acima e fica a espera de um ENTER
-	//como saltamos a frente e mostramos logo as perguntas?
+
 
 	
-	//abre ficheiro
+
 	*fp = fopen("dados.dat", "a");
 	
-	//dormir aqui? Sleep(3000);
+
 	
 	if (*fp == NULL)
 	{
@@ -155,47 +164,31 @@ int inserir(long total, FILE **fp) {
 		exit(0);
 	}
 		
-	if (_getch() != 27)
-		do
-		{			
-			// nota - não estamos a validar a introdução. experimentem ver a opção consultar, visto
-			// se inserirem espaços/ENTER ele guarda isso tudo no ficheiro e a consulta/listagem fica "feia"
+
+		liv.num = ++total;			
 
 			
-			//liv.num = 60;
-			liv.num = ++total;			
-			//printf("\n\n\nISBN: %ld", liv.num);
+		printf("\n\nDigite o Titulo do livro:");
+		while (getchar() != '\n');
+		fgets(liv.nome, 30, stdin);
 
-			// HELP - não consigo que a pergunta "titulo do livro" funcione no visual studio
-			// :( Simplesmente salta para a pergunta seguinte
+
+		printf("\n\nDigite o Autor do livro: ");
+		fflush(stdin);
+		fgets(liv.autor, 30, stdin);
+
+
+		printf("\n\nDigite o valor do livro: ");
+		fflush(stdin);
+		scanf("%f", &liv.valor);
+
 			
-			printf("\n\nDigite o Titulo do livro:");
-			while (getchar() != '\n');
-			fgets(liv.nome, 30, stdin);
-			// fgets é o gets mas novo e atualizado
-			//printf("\nNome: %s", liv.nome);
-
-			printf("\n\nDigite o Autor do livro: ");
-			fflush(stdin);
-			fgets(liv.autor, 30, stdin);
-			//printf("\nAutor: %s", liv.autor);
-
-			printf("\n\nDigite o valor do livro: ");
-			fflush(stdin);
-			scanf("%f", &liv.valor);
-			//printf("\nValor: %4.2f", liv.valor);
-			
-			fwrite(&liv, sizeof(liv), 1, *fp);
-
-			// o ESC está a gerar loop no menu inicial é preciso perceber porquê
-			printf("\n\nClique em ESC para sair\n\n");
-			printf("\t ou em outra tecla para novo registo\n\n");
-
-			fflush(stdin);
-		} while (_getch() != 27);
+		fwrite(&liv, sizeof(liv), 1, *fp);
 
 
-		// fecha ficheiro que estava aberto para escrita-append
+		printf("\n\nLivro introduzido\n\n");
+
+		fflush(stdin);
 
 		fclose(*fp);
 
@@ -205,94 +198,90 @@ int inserir(long total, FILE **fp) {
 };
 
 int alterar() {
-	int salto;
-	int encontra = 0;
-	char cont_procurar;
 	system("cls");
 	cout << "######################" << endl;
 	cout << "\n\t\tOpção Alterar" << endl;
 	cout << "\n######################" << endl;
 	cout << endl << endl;
+	
+	int salto;
+	FILE *fp_tmp2;
 
-	cont_procurar = 's';
+	fp = fopen("dados.dat", "r");
+	fp_tmp2 = fopen("tmp2.dat", "w");
 
-	while (cont_procurar == 's') {
+	system("cls");
+	cout << "######################" << endl;
+	cout << "\n\t\tOpção Eliminar" << endl;
+	cout << "\n######################" << endl;
 
-		cout << "Introduza a ID do livro a alterar:" << endl;
-		fflush(stdin);
-		scanf("%d", &salto);
-		printf("\nsalto=%d", salto);
-		fp = fopen("dados.dat", "r+");
-
-
-		//		fp = fopen("dados.dat", "rw");
-
-		//encontralivro = "KO";
-
-		while (fread(&liv, sizeof(liv), 1, fp) == 1) {
-			printf("\nliv.num=%d", liv.num);	printf("\nsalto=%d", salto);
-			if (liv.num == salto) {
-				//system("cls");
-				encontra = 1;
-				printf("\nLivro com o ISBN: %ld encontrado", liv.num);
-				printf("\n\t1.Nome: %s", liv.nome);
-				printf("\n\t2.Autor: %s", liv.autor);
-				printf("\n\t3.Valor: %4.2f\n\n\n", liv.valor);
-				//printf("Escolha a opção que pretende alterar.");
-
-				printf("\n\nDigite o novo Título do livro:");
-				fflush(stdin);
-				scanf("%s", liv.nome);
-
-				printf("\n\nDigite o novo Autor do livro: ");
-				fflush(stdin);
-				scanf("%s", liv.autor);
-
-				printf("\n\nDigite o novo valor do livro: ");
-				fflush(stdin);
-				scanf("%f", &liv.valor);
+	cout << "Introduza a ID do livro a alterar:" << endl;
+	fflush(stdin);
+	scanf("%d", &salto);
 
 
+	if (fp == NULL)
+	{
+		cout << "ERRO!\nO Ficheiro não foi aberto.\n" << endl;
 
-				/*
-				switch(getch()){
-				case '1':
-				printf("\n\nDigite o novo Título do livro:");
-				fflush(stdin);
-				scanf("%s", liv.nome);
-				break;
-				case '2':
-				printf("\n\nDigite o novo Autor do livro: ");
-				fflush(stdin);
-				scanf("%s", liv.autor);
-				break;
-				case '3':
-				printf("\n\nDigite o novo valor do livro: ");
-				fflush(stdin);
-				scanf("%f", &liv.valor);
-				}
+		cout << "\n\nDigite uma tecla para terminar Programa\n" << endl;
 
-				*/
+		cout.flush();
+		ch = _getch();
+		exit(0);
+	} 
 
-				printf("\nRegisto atualizado.");
-				fclose(fp);
-				fp = fopen("dados.dat", "rb+");
-				fseek(fp, ftell(fp) - sizeof(liv), 0);
-				fwrite(&liv, sizeof(liv), 1, fp);
-				fclose(fp);
-				//break;
-			}
+	while (fread(&liv, sizeof(liv), 1, fp) == 1){
+		
+		if(liv.num != salto){
+			
+			fwrite(&liv, sizeof(liv), 1, fp_tmp2);
+			
+		} else {
+					
+	
+			printf("\n\nDigite o Titulo do livro:");
+			while (getchar() != '\n');
+			fgets(liv.nome, 30, stdin);
 
+			printf("\n\nDigite o Autor do livro: ");
+			fflush(stdin);
+			fgets(liv.autor, 30, stdin);
 
-		}
-		if (encontra != 1) printf("\nISBN não encontrado.");
+			printf("\n\nDigite o valor do livro: ");
+			fflush(stdin);
+			scanf("%f", &liv.valor);
+			
+			fwrite(&liv, sizeof(liv), 1, fp_tmp2);
 
-		printf("\n\nDeseja procurar novamente ou modificar outro registo (S/N)");
-		fflush(stdin);
-		cont_procurar = _getch();
+			printf("\n\nRegisto alterado.\n\n");
+
+			fflush(stdin);
+					
+		}	
+		
+	}	
+
+	fclose(fp);
+	fclose(fp_tmp2);
+	
+	
+	fp = fopen("dados.dat", "w");
+	fp_tmp2 = fopen("tmp2.dat", "r");
+	
+	while (fread(&liv, sizeof(liv), 1, fp_tmp2) == 1){
+		
+		fwrite(&liv, sizeof(liv), 1, fp);		
+		
 	}
+		
+	fclose(fp);
+	fclose(fp_tmp2);
+	
 	system("PAUSE");
 	return 0;
+
+	
 }
 
 int consultar() {
@@ -301,11 +290,9 @@ int consultar() {
 	cout << "\n\t\tOpção Consultar" << endl;
 	cout << "\n######################" << endl;
 
-	// abre agora o ficheiro para leitura
 
 	fp = fopen("dados.dat", "r");
 
-	// enquanto houverem registos imprimir cada um para o ecrã
 
 	while (fread(&liv, sizeof(liv), 1, fp))
 	{
@@ -327,10 +314,10 @@ int consultar() {
 int eliminar() {
 	int regencontrado = 0;
 	int salto;
-	struct livro registo;
+
 	FILE *fp_tmp;
 
-	fp = fopen("dados.dat", "rw");
+	fp = fopen("dados.dat", "r");
 	fp_tmp = fopen("tmp.dat", "w");
 
 	system("cls");
@@ -352,7 +339,7 @@ int eliminar() {
 		cout.flush();
 		ch = _getch();
 		exit(0);
-	}
+	} 
 
 	while (fread(&liv, sizeof(liv), 1, fp) == 1){
 		
@@ -366,11 +353,24 @@ int eliminar() {
 
 	fclose(fp);
 	fclose(fp_tmp);
-	remove("dados.dat");
-	rename("tmp.dat", "dados.dat");
+	
+	
 
+	fp = fopen("dados.dat", "w");
+	fp_tmp = fopen("tmp.dat", "r");
+	
+	while (fread(&liv, sizeof(liv), 1, fp_tmp) == 1){
+		
+		fwrite(&liv, sizeof(liv), 1, fp);		
+		
+	}
+		
+	fclose(fp);
+	fclose(fp_tmp);
+	
 	system("PAUSE");
 	return 0;
+
 }
 
 
@@ -400,12 +400,9 @@ int main() {
 		cout << "\n\tOpção: ";
 		cin >> escolhamenu;
 
-		//Marcos a testar - validação do input. o objetivo é só conseguir inserir numeros e não outros chars
+		//validação do input. o objetivo é só conseguir inserir numeros e não outros chars
 		if (cin.fail()) {
-			/*system("cls");
-			cout << "erro";
-			cin.clear();
-			system("pause");*/
+
 		}
 		else {
 
