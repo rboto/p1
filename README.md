@@ -1,3 +1,6 @@
+# My final project for Programming 1 class
+It is a basic book organizer software. The menu, lists, adds, changes, searches and deletes books. Developed in C.
+
 Trabalho de P1
 
 
